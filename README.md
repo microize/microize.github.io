@@ -13,6 +13,6 @@ This repository contains the source code for my personal portfolio website, show
 - Google Fonts, Ionicons
 
 ## Live Demo
-[Visit the Website](#sripathi.com)
+[Visit the Website](https://sripathim.com)
 
 ---
