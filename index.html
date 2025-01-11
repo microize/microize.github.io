@@ -417,93 +417,171 @@
 
 <!--- #PORTFOLIO-->
 <article class="portfolio" data-page="portfolio">
-	<header><h2 class="h2 article-title">Portfolio</h2></header>
-	<section class="projects">
-<!-- 		<ul class="filter-list">
-			<li class="filter-item"><button class="active" data-filter-btn>All</button></li>
-			<li class="filter-item"><button data-filter-btn>Generative AI</button></li>
-			<li class="filter-item"><button data-filter-btn>Machine Learning</button></li>
-			<li class="filter-item"><button data-filter-btn>Data Engineering</button></li>
-			<li class="filter-item"><button data-filter-btn>Data Science</button></li>
-			<li class="filter-item"><button data-filter-btn>Quant Finance</button></li>
-			<li class="filter-item"><button data-filter-btn>Design</button></li>
+  <header>
+    <h2 class="h2 article-title">Portfolio</h2>
+  </header>
 
-		</ul>
+  <section class="projects">
+    <!-- Filter Buttons -->
+    <ul class="filter-list">
+      <li class="filter-item">
+        <button class="active" data-filter-btn>All</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Generative AI</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Machine Learning</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Data Engineering</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Data Science</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Quant Finance</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Design</button>
+      </li>
+    </ul>
 
-		<div class="filter-select-box">
-			<button class="filter-select" data-select>
-				<div class="select-value" data-selecct-value>Select category</div>
-				<div class="select-icon"><ion-icon name="chevron-down"></ion-icon></div>
-			</button>
-			<ul class="select-list">
-				<li class="select-item"><button data-select-item>All</button></li>
-				<li class="select-item"><button data-select-item>Generative AI</button></li>
-				<li class="select-item"><button data-select-item>Machine Learning</button></li>
-				<li class="select-item"><button data-select-item>Data Engineering</button></li>
-				<li class="select-item"><button data-select-item>Data Science</button></li>
-				<li class="select-item"><button data-select-item>Quant Finance</button></li>
-				<li class="select-item"><button data-select-item>Design</button></li>
-			</ul>
-		</div> -->
+    <!-- Filter Select (Dropdown) -->
+    <div class="filter-select-box">
+      <button class="filter-select" data-select>
+        <div class="select-value" data-select-value>Select category</div>
+        <div class="select-icon">
+          <ion-icon name="chevron-down"></ion-icon>
+        </div>
+      </button>
 
-	<ul class="project-list">
-		<li class="project-item active" data-filter-item data-category="Generative AI">
-			<a href="https://github.com/microize/Projects_Gen_ai">
-			<figure class="project-img">
-				<div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-				<img src="./assets/images/project-1.jpg" alt="Generative AI" loading="lazy">
-			</figure>
-			<h3 class="project-title">Generative AI Projects</h3>
-			</a>
-		</li>
-		<li class="project-item active" data-filter-item data-category="Machine Learning">
-			<a href="https://github.com/microize/Projects_Machine_Learning">
-			<figure class="project-img">
-				<div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-				<img src="./assets/images/project-1.jpg" alt="Machine Learning Projects" loading="lazy">
-			</figure>
-			<h3 class="project-title">Machine Learning Projects</h3>
-			</a>
-		</li>
-			<li class="project-item active" data-filter-item data-category="Data Science">
-			<a href="https://github.com/microize/Projects_Data_Analytics">
-			<figure class="project-img">
-				<div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-				<img src="./assets/images/project-1.jpg" alt="Data Science Projects" loading="lazy">
-			</figure>
-			<h3 class="project-title">Data Science Projects</h3>
-			</a>
-		</li>
-		<li class="project-item active" data-filter-item data-category="Data Engineering">
-			<a href="https://github.com/microize/Projects_Data_Engineering">
-				<figure class="project-img">
-					<div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-					<img src="./assets/images/project-1.jpg" alt="Machine Learning" loading="lazy">
-				</figure>
-				<h3 class="project-title">Data Engineering Projects</h3>
-			</a>
-		</li>
-		<li class="project-item active" data-filter-item data-category="Quant Finance">
-			<a href="https://github.com/microize/Projects_Quant_Finance">
-				<figure class="project-img">
-					<div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-					<img src="./assets/images/project-1.jpg" alt="Quant Finance" loading="lazy">
-				</figure>
-				<h3 class="project-title">Quant Finance Projects</h3>
-			</a>
-		</li>
-		<li class="project-item active" data-filter-item data-category="Design">
-			<a href="https://github.com/microize/Projects_Design">
-				<figure class="project-img">
-					<div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div>
-					<img src="./assets/images/project-1.jpg" alt="Design" loading="lazy">
-				</figure>
-				<h3 class="project-title">Design Projects</h3>
-			</a>
-		</li>
-	</ul>
-	</section>
+      <ul class="select-list">
+        <li class="select-item">
+          <button data-select-item>All</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Generative AI</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Machine Learning</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Data Engineering</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Data Science</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Quant Finance</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Design</button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Project Items -->
+    <ul class="project-list">
+      <li class="project-item active" data-filter-item data-category="Generative AI">
+        <a href="https://github.com/microize/Projects_Gen_ai">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/project-1.jpg"
+              alt="Generative AI"
+              loading="lazy"
+            />
+          </figure>
+          <h3 class="project-title">Generative AI Projects</h3>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Machine Learning">
+        <a href="https://github.com/microize/Projects_Machine_Learning">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/project-1.jpg"
+              alt="Machine Learning Projects"
+              loading="lazy"
+            />
+          </figure>
+          <h3 class="project-title">Machine Learning Projects</h3>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Data Science">
+        <a href="https://github.com/microize/Projects_Data_Analytics">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/project-1.jpg"
+              alt="Data Science Projects"
+              loading="lazy"
+            />
+          </figure>
+          <h3 class="project-title">Data Science Projects</h3>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Data Engineering">
+        <a href="https://github.com/microize/Projects_Data_Engineering">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/project-1.jpg"
+              alt="Machine Learning"
+              loading="lazy"
+            />
+          </figure>
+          <h3 class="project-title">Data Engineering Projects</h3>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Quant Finance">
+        <a href="https://github.com/microize/Projects_Quant_Finance">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/project-1.jpg"
+              alt="Quant Finance"
+              loading="lazy"
+            />
+          </figure>
+          <h3 class="project-title">Quant Finance Projects</h3>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Design">
+        <a href="https://github.com/microize/Projects_Design">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/project-1.jpg"
+              alt="Design"
+              loading="lazy"
+            />
+          </figure>
+          <h3 class="project-title">Design Projects</h3>
+        </a>
+      </li>
+    </ul>
+  </section>
 </article>
+
 
 
 <!--- #BLOG -->
