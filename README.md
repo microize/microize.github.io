@@ -154,3 +154,5 @@ MIT License - Feel free to use this project as inspiration for your own portfoli
 ---
 
 **Built with care and clean code principles**
+
+*Last updated: August 2024*
