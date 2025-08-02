@@ -1,0 +1,50 @@
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="navbar-list">
+            {% if page and page.url and page.url != "/" %}
+                <!-- Blog post navigation - use direct links -->
+                <li class="navbar-item">
+                    <a href="/#about" class="navbar-link">About</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/#resume" class="navbar-link">Resume</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/#portfolio" class="navbar-link">Portfolio</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/blog/" class="navbar-link active">Blog</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/#contact" class="navbar-link">Contact</a>
+                </li>
+            {% else %}
+                <!-- Main page navigation - use JavaScript -->
+                <li class="navbar-item">
+                    <button class="navbar-link active" data-nav-link>
+                        About
+                    </button>
+                </li>
+                <li class="navbar-item">
+                    <button class="navbar-link" data-nav-link>
+                        Resume
+                    </button>
+                </li>
+                <li class="navbar-item">
+                    <button class="navbar-link" data-nav-link>
+                        Portfolio
+                    </button>
+                </li>
+                <li class="navbar-item">
+                    <button class="navbar-link" data-nav-link onclick="window.location.href='/blog/'">
+                        Blog
+                    </button>
+                </li>
+                <li class="navbar-item">
+                    <button class="navbar-link" data-nav-link>
+                        Contact
+                    </button>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>

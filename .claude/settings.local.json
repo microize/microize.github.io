@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(python3:*)",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(rm:*)",
+      "WebFetch(domain:www.linkedin.com)",
+      "WebFetch(domain:3sripathi.medium.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.kaggle.com)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(ls:*)",
+      "Bash(mv:*)",
+      "Bash(npm run serve:*)",
+      "Bash(pkill:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)"
+    ],
+    "deny": []
+  }
+}
