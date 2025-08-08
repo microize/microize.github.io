@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sripathi Mohanasundaram - Personal Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/fav_log.ico" type="image/x-icon">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    
+    <meta name="description" content="Sripathi Mohanasundaram - Senior Data Engineer with 8+ years transforming data landscapes across retail, energy, and tech sectors">
+    
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="About">
+    
+    <meta property="og:description" content="Sripathi Mohanasundaram - Senior Data Engineer with 8+ years transforming data landscapes across retail, energy, and tech sectors">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/">
+</head>
+
+<body>
+        
+<!-- Scrolling Banner -->
+<div class="scrolling-banner">
+    <div class="banner-content">
+        <span class="banner-text" id="banner-text">
+This site is more than a portfolio – it's a blueprint of how I think and build<span class="separator">|</span>
+I believe great products live at the intersection of design, data, and human behavior<span class="separator">|</span>
+I lead with systems thinking, design clarity, and an obsession with outcomes<span class="separator">|</span>
+I’ve scaled data platforms, mentored engineering teams, and delivered GenAI capability<span class="separator">|</span>
+My approach blends aesthetics with architecture – built to solve, not just impress<span class="separator">|</span>
+I'm here to create lasting impact through meaningful, intelligent work<span class="separator">|</span>
+Somewhere in this site, there’s an easter egg – because great design rewards those who explore<span class="separator">|</span>
+</span>
+    </div>
+</div>
+
+<!-- Main -->
+<main>
+    <!-- Sidebar -->
+    <aside class="sidebar" data-sidebar>
+        <div class="sidebar-info">
+            <!-- Avatar Box -->
+            <figure class="avatar-box">
+                <img src="./assets/images/my-avatar.png" alt="Richard hanrick" width="80">
+            </figure>
+            <div class="info-content">
+                <h1 class="name" title="Richard hanrick">Sripathi M</h1>
+                <span class="title title-braun">Senior Data Engineer</span>
+            </div>
+            <button class="info_more-btn" data-sidebar-btn>
+                <span>Show Contacts</span>
+                <ion-icon name="chevron-down"></ion-icon>
+            </button>
+        </div>
+
+        <div class="sidebar-info_more">
+            <div class="separator"></div>
+
+            <ul class="social-list">
+                <li class="social-item">
+                    <a href="https://www.linkedin.com/in/sripathi-mohanasundaram/" class="social-link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://www.kaggle.com/microize" class="social-link">
+                        <ion-icon name="link-outline"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://github.com/microize" class="social-link">
+                        <ion-icon name="logo-github"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://twitter.com/SripathiMohana1" class="social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+                <!-- <li class="social-item">
+                    <a href="#" class="social-link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li> -->
+            </ul>
+
+            <div class="separator"></div>
+
+            <ul class="contacts-list">
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="mail-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">Email</p>
+                        <a href="mailto:3sripathi@gmail.com" class="contact-link">3sripathi@gmail.com</a>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="phone-portrait-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">Phone</p>
+                        <a href="tel:+12133522795" class="contact-link">+91-7010271248</a>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">D.O.B</p>
+                        <time datetime="1994-06-03">June 03, 1994</time>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="location-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">Location</p>
+                        <address>Chennai, Tamil Nadu, India</address>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+
+<!-- Main Content -->
+<div class="main-content">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="navbar-list">
+            <li class="navbar-item">
+                <button class="navbar-link active" data-nav-link>About</button>
+            </li>
+            <li class="navbar-item">
+                <button class="navbar-link" data-nav-link>Resume</button>
+            </li>
+            <li class="navbar-item">
+                <button class="navbar-link" data-nav-link>Portfolio</button>
+            </li>
+            <li class="navbar-item">
+                <button class="navbar-link" data-nav-link onclick="window.location.href='/blog/'">Blog</button>
+            </li>
+            <li class="navbar-item">
+                <button class="navbar-link" data-nav-link>Contact</button>
+            </li>
+        </ul>
+    </nav>
+
+<!-- About Section -->
+<article class="about active" data-page="about">
+    <header>
+        <h2 class="h2 article-title">Profile</h2>
+    </header>
+      <section class="about-text"> 
+      <p>
+        I'm a <strong>Senior Data Engineer</strong> with over 8 years of experience driving data innovation 
+        across diverse industries. At <strong>Fractal Analytics</strong>, I currently spearhead 
+        <strong>Generative AI</strong> initiatives, blending cutting-edge tech with real-world impact. 
+        My core expertise lies in building scalable, cloud-native data platforms and optimizing pipelines 
+        for performance and cost-leveraging tools like <strong>Azure</strong>, <strong>Databricks</strong>, 
+        and the modern data stack.
+        </p>
+        <p> Known for a leadership style rooted in <strong>transparency</strong>, 
+        <strong>client-centric thinking</strong>, and <strong>operational excellence</strong>, I thrive at 
+        the intersection of engineering and strategy. I’m also an active participant in GenAI hackathons 
+        and machine learning projects, constantly pushing the boundaries of what’s possible.
+      </p>
+</section>
+
+
+<!-- Programming Language Section -->
+<section class="skills-grid">
+    <h3 class="h3 skills-title">Technical Skills & Tools</h3>
+    <div class="skills-container">
+        <div class="skills-column">
+            <ul class="skills-list-column">
+                <li class="skill-item-column">Python</li>
+                <li class="skill-item-column">SQL</li>
+                <li class="skill-item-column">PySpark</li>
+                <li class="skill-item-column">Data Modelling</li>
+                <li class="skill-item-column">Dimensional Modelling</li>                  
+            </ul>
+        </div>
+        
+        <div class="skills-column">
+            <ul class="skills-list-column">
+                <li class="skill-item-column">Generative AI</li> 
+                <li class="skill-item-column">Azure Data Factory</li>
+                <li class="skill-item-column">Azure Databricks</li>
+                <li class="skill-item-column">Azure Functions</li>
+                <li class="skill-item-column">Azure AI Foundry</li>                 
+            </ul>
+        </div>
+    </div>
+    <br>
+</section>
+
+	
+<!-- Libraries Section -->
+<section class="skills-grid">
+    <h3 class="h3 skills-title">Data &amp; AI Libraries</h3>
+
+    <div class="skills-container">
+        <!-- Column 1 -->
+        <div class="skills-column">
+            <ul class="skills-list-column">
+                <li class="skill-item-column">Pandas</li>
+                <li class="skill-item-column">NumPy</li>
+                <li class="skill-item-column">Azure SDK</li>
+                <li class="skill-item-column">Scikit-learn</li>
+                <li class="skill-item-column">Keras</li>
+            </ul>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="skills-column">
+            <ul class="skills-list-column">
+                <li class="skill-item-column">Hugging Face Transformers</li>
+                <li class="skill-item-column">LangChain</li>
+                <li class="skill-item-column">Langraph</li>
+                <li class="skill-item-column">Unsloth</li>
+                <li class="skill-item-column">MLflow</li>
+            </ul>
+        </div>
+    </div>
+    <br>
+</section>
+
+<!-- Certifications Section -->
+<section class="skills-grid">
+    <h3 class="h3 skills-title">Certifications</h3>
+    <div class="skills-container">
+        <div class="skills-column">
+            <ul class="skills-list-column">
+                <li class="skill-item-column">Microsoft Fabric Analytics Engineer Associate</li>
+                <!-- <li class="skill-item-column">Azure Data Engineer Associate</li>
+                <li class="skill-item-column">Azure Fundamentals</li> -->
+            </ul>
+        </div>
+        
+        <div class="skills-column">
+            <ul class="skills-list-column">
+                <!-- <li class="skill-item-column">PMP Certified</li>
+                <li class="skill-item-column">Databricks Certified</li>
+                <li class="skill-item-column">Power BI Data Analyst</li> -->
+            </ul>
+        </div>
+    </div>
+    <br>
+</section>
+</article>
+
+
+
+<!--- #RESUME-->
+
+<article class="resume" data-page="resume">
+
+  <header>
+    <h2 class="h2 article-title">Resume</h2>
+  </header>
+
+  <a href='./assets/00_sripathi_m_data_engineer.pdf' target="_blank" class="braun-button">
+    <ion-icon name="download-outline"></ion-icon>
+    <span>Download Resume</span>
+  </a>
+
+  <br>
+
+  <section class="timeline">
+
+    <div class="title-wrapper">
+      <div class="icon-box">
+        <ion-icon name="book-outline"></ion-icon>
+      </div>
+      <h3 class="h3">Experience</h3>
+    </div>
+
+    <ol class="timeline-list">
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">Data Engineer</h4>
+        <span>Fractal Analytics | Jan 2023 — Present</span>
+        <p class="timeline-text">
+	  Developed scalable metadata pipelines using Databricks, Azure tools, and SQL, enhancing data scalability for a retail client.
+	  <br><br>
+	  Contributed to ODS project, replicating 50+ transactional tables to reduce system load and enable faster scalability.
+	  <br><br>
+	  Built in-store Virtual Assistant with Databricks and Azure OpenAI, improving customer support and ticket classification.
+	  <br><br>
+	  Migrated data from Azure Synapse to Microsoft Fabric OneLake, ensuring integrity and optimizing storage architecture.
+	  <br><br>
+	  Monitored and optimized pipelines, achieving 99.9% uptime and supporting rapid scaling for high-volume data operations.
+	  <br><br>
+	  Collaborated with stakeholders to design scalable solutions, delivering measurable outcomes aligned with growth goals.
+	</p>
+	<br>
+
+	      
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">Data Engineer</h4>
+        <span>Accenture AI | Sep 2021 — Dec 2022</span>
+        <p class="timeline-text">
+           Designed and deployed robust ETL pipelines for efficient data staging, transformation, and loading into Azure Data Warehouse, prioritizing performance and scalability.
+	    <br><br>
+	    Utilized Azure Data Factory to streamline workflow orchestration and monitor pipeline operations, enhancing data integration processes.
+	    <br><br>
+	    Applied Azure Databricks and PySpark for advanced data cleansing, transformation, and processing, achieving significant improvements in data quality and processing speed.
+	    <br><br>
+	    Authored and optimized SQL scripts for seamless data modeling, extraction, and management tasks.
+	    <br><br>
+	    Performed detailed data profiling, validation, and quality assurance to uphold data accuracy and consistency across datasets.
+	  </p>
+        <br>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">Data Analyst</h4>
+        <span>Quest Global | Jun 2019 - Sep 2021</span>
+         <p class="timeline-text">
+          Conducted comprehensive analysis of diverse datasets including Oil Production, Air Emission, and Electrical data, employing statistical techniques and data visualization tools.
+          <br><br>
+          Developed and maintained Tableau dashboards, reports, and visualizations, presenting complex data in a concise and compelling manner to facilitate data-driven decision-making.
+          <br><br>
+          Conducted exploratory data analysis (EDA) to uncover patterns, trends, and correlations in the data, providing actionable insights to support business strategies and process improvements.
+        </p>
+        <br>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">Software Engineer</h4>
+        <span>Asenton Technologies | Feb 2016 - Feb 2018</span>
+        <p class="timeline-text">
+          Developed WooCommerce plugins to implement features like infinite scrolling, reward points, cart recovery, and subscription management.
+          <br><br>
+          Created responsive, visually appealing product landing pages using HTML and CSS.
+          <br><br>
+          Analyzed digital marketing metrics to optimize campaigns and drive engagement through strategic email initiatives.
+          <br><br>
+          Fixed front-end issues on customer websites to enhance functionality and user experience.
+        </p>
+        <br>
+      </li>
+
+    </ol>
+
+  </section>
+
+  <section class="timeline">
+
+    <div class="title-wrapper">
+      <div class="icon-box">
+        <ion-icon name="book-outline"></ion-icon>
+      </div>
+      <h3 class="h3">Education</h3>
+    </div>
+
+    <ol class="timeline-list">
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">PG DIPLOMA (Thermal Power Plant Engineering)</h4>
+        <span>National Power Training Institute | 2018 - 2019</span>
+        <p class="timeline-text">
+          Focused on power plant operation and maintenance.
+        </p>
+        <br>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">B.E. (Electrical and Electronics Engineering)</h4>
+        <span>Anna University | 2011 - 2015</span>
+        <p class="timeline-text">
+          Core Electrical and Electronics concepts.
+        </p>
+        <br>
+      </li>
+    </ol>
+
+  </section>
+
+</article>
+
+
+
+<!--- #PORTFOLIO-->
+<article class="portfolio" data-page="portfolio">
+  <header>
+    <h2 class="h2 article-title">Portfolio</h2>
+  </header>
+
+  <section class="projects">
+    <!-- Filter Buttons -->
+    <ul class="filter-list">
+      <li class="filter-item">
+        <button class="active" data-filter-btn>All</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Generative AI</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Machine Learning</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Data Engineering</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Data Science</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Quant Finance</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Design</button>
+      </li>
+    </ul>
+
+    <!-- Filter Select (Dropdown) -->
+    <div class="filter-select-box">
+      <button class="filter-select" data-select>
+        <div class="select-value" data-select-value>Select category</div>
+        <div class="select-icon">
+          <ion-icon name="chevron-down"></ion-icon>
+        </div>
+      </button>
+
+      <ul class="select-list">
+        <li class="select-item">
+          <button data-select-item>All</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Generative AI</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Machine Learning</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Data Engineering</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Data Science</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Quant Finance</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Design</button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Project Items -->
+    <ul class="project-list">
+      <li class="project-item active" data-filter-item data-category="generative ai">
+        <div class="project-content">
+          <h3 class="project-title">
+            <a href="https://github.com/microize/Projects_Gen_ai" title="Generative AI Projects" class="truncated-title">
+              GenAI Projects
+            </a>
+          </h3>
+          <p class="project-description">Intelligent systems and creative algorithms showcasing the power of modern AI technology</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">OpenAI</span>
+            <span class="tech-tag">LangChain</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/microize/Projects_Gen_ai" class="project-btn">
+              <span>View Project</span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="machine learning">
+        <div class="project-content">
+          <h3 class="project-title">
+            <a href="https://github.com/microize/Projects_Machine_Learning" title="Machine Learning Projects" class="truncated-title">
+              Machine Learning
+            </a>
+          </h3>
+          <p class="project-description">Advanced algorithms and predictive models that transform complex data into actionable insights</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">TensorFlow</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/microize/Projects_Machine_Learning" class="project-btn">
+              <span>View Project</span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="data science">
+        <div class="project-content">
+          <h3 class="project-title">
+            <a href="https://github.com/microize/Projects_Data_Analytics" title="Data Science Projects" class="truncated-title">
+              Data Science
+            </a>
+          </h3>
+          <p class="project-description">Comprehensive data exploration and analysis revealing patterns in diverse datasets</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">Matplotlib</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/microize/Projects_Data_Analytics" class="project-btn">
+              <span>View Project</span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="data engineering">
+        <div class="project-content">
+          <h3 class="project-title">
+            <a href="https://github.com/microize/Projects_Data_Engineering" title="Data Engineering Projects" class="truncated-title">
+              Data Engineering
+            </a>
+          </h3>
+          <p class="project-description">Robust pipelines and scalable architectures that power modern data-driven applications</p>
+          <div class="project-tech">
+            <span class="tech-tag">Azure</span>
+            <span class="tech-tag">Databricks</span>
+            <span class="tech-tag">Apache Kafka</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/microize/Projects_Data_Engineering" class="project-btn">
+              <span>View Project</span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="quant finance">
+        <div class="project-content">
+          <h3 class="project-title">
+            <a href="https://github.com/microize/Projects_Quant_Finance" title="Quant Finance Projects" class="truncated-title">
+              Quant Finance
+            </a>
+          </h3>
+          <p class="project-description">Algorithmic trading strategies and financial modeling for risk management and optimization</p>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">QuantLib</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/microize/Projects_Quant_Finance" class="project-btn">
+              <span>View Project</span>
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="design">
+        <div class="project-content">
+          <h3 class="project-title">
+            <a href="https://github.com/microize/Projects_Design" title="Design Projects" class="truncated-title">
+              Design Projects
+            </a>
+          </h3>
+          <p class="project-description">Creative solutions in UX/UI design, branding, and visual communication following modern principles</p>
+          <div class="project-tech">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">Adobe XD</span>
+            <span class="tech-tag">CSS</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/microize/Projects_Design" class="project-btn">
+              <span>View Project</span>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+</article>
+
+
+
+<!--- #BLOG -->
+<article class="blog" data-page="blog">
+  <header>
+    <h2 class="h2 article-title">Blog</h2>
+  </header>
+
+  <section class="projects">
+    <!-- Filter Buttons -->
+    <ul class="filter-list">
+      <li class="filter-item">
+        <button class="active" data-filter-btn>All</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Data Engineering</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>AI & Machine Learning</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Leadership</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Career</button>
+      </li>
+      <li class="filter-item">
+        <button data-filter-btn>Industry</button>
+      </li>
+    </ul>
+
+    <!-- Filter Select (Dropdown) -->
+    <div class="filter-select-box">
+      <button class="filter-select" data-select>
+        <div class="select-value" data-select-value>Select category</div>
+        <div class="select-icon">
+          <ion-icon name="chevron-down"></ion-icon>
+        </div>
+      </button>
+
+      <ul class="select-list">
+        <li class="select-item">
+          <button data-select-item>All</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Data Engineering</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>AI & Machine Learning</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Leadership</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Career</button>
+        </li>
+        <li class="select-item">
+          <button data-select-item>Industry</button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Blog Post Items -->
+    <ul class="project-list">
+      <li class="project-item active" data-filter-item data-category="data engineering">
+        <a href="/blog/data-pipeline-architecture-best-practices/">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/blog-1.jpg"
+              alt="Data Pipeline Architecture"
+              loading="lazy"
+            />
+          </figure>
+          <div class="project-content">
+            <h3 class="project-title">Data Pipeline Architecture: Best Practices for Scalable Systems</h3>
+            <p class="project-description">Essential strategies for building robust, scalable data pipelines that can handle enterprise-scale workloads</p>
+            <div class="project-tech">
+              <span class="tech-tag">Azure Data Factory</span>
+              <span class="tech-tag">Apache Kafka</span>
+              <span class="tech-tag">Databricks</span>
+              <span class="tech-tag">Architecture</span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="ai & machine learning">
+        <a href="/blog/generative-ai-enterprise-adoption/">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/blog-2.jpg"
+              alt="Generative AI in Enterprise"
+              loading="lazy"
+            />
+          </figure>
+          <div class="project-content">
+            <h3 class="project-title">Generative AI in Enterprise: From Proof of Concept to Production</h3>
+            <p class="project-description">Practical insights on successfully implementing GenAI solutions in enterprise environments</p>
+            <div class="project-tech">
+              <span class="tech-tag">Azure OpenAI</span>
+              <span class="tech-tag">LangChain</span>
+              <span class="tech-tag">MLOps</span>
+              <span class="tech-tag">Strategy</span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="leadership">
+        <a href="/blog/leading-data-teams-through-transformation/">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/blog-3.jpg"
+              alt="Leading Data Teams"
+              loading="lazy"
+            />
+          </figure>
+          <div class="project-content">
+            <h3 class="project-title">Leading Data Teams Through Digital Transformation</h3>
+            <p class="project-description">Strategic approaches to building and scaling high-performance data engineering teams</p>
+            <div class="project-tech">
+              <span class="tech-tag">Leadership</span>
+              <span class="tech-tag">Team Building</span>
+              <span class="tech-tag">Strategy</span>
+              <span class="tech-tag">Culture</span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="career">
+        <a href="/blog/data-engineer-career-path-2024/">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/blog-4.jpg"
+              alt="Data Engineer Career Path"
+              loading="lazy"
+            />
+          </figure>
+          <div class="project-content">
+            <h3 class="project-title">Data Engineer Career Path: Skills and Roadmap for 2024</h3>
+            <p class="project-description">Comprehensive guide to building a successful career in data engineering with current market insights</p>
+            <div class="project-tech">
+              <span class="tech-tag">Career</span>
+              <span class="tech-tag">Skills</span>
+              <span class="tech-tag">Roadmap</span>
+              <span class="tech-tag">Learning</span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="industry">
+        <a href="/blog/modern-data-stack-evolution/">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/blog-5.jpg"
+              alt="Modern Data Stack"
+              loading="lazy"
+            />
+          </figure>
+          <div class="project-content">
+            <h3 class="project-title">The Evolution of the Modern Data Stack: Trends and Predictions</h3>
+            <p class="project-description">Analysis of current trends shaping the data engineering landscape and future predictions</p>
+            <div class="project-tech">
+              <span class="tech-tag">Data Stack</span>
+              <span class="tech-tag">Trends</span>
+              <span class="tech-tag">Analytics</span>
+              <span class="tech-tag">Future</span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="data engineering">
+        <a href="/blog/microsoft-fabric-migration-guide/">
+          <figure class="project-img">
+            <div class="project-item-icon-box">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img
+              src="./assets/images/blog-6.jpg"
+              alt="Microsoft Fabric Migration"
+              loading="lazy"
+            />
+          </figure>
+          <div class="project-content">
+            <h3 class="project-title">Microsoft Fabric Migration: Lessons from Production Implementation</h3>
+            <p class="project-description">Real-world insights from migrating enterprise workloads to Microsoft Fabric OneLake</p>
+            <div class="project-tech">
+              <span class="tech-tag">Microsoft Fabric</span>
+              <span class="tech-tag">Migration</span>
+              <span class="tech-tag">OneLake</span>
+              <span class="tech-tag">Azure</span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+</article>
+
+<!--- #CONTACT--->
+<article class="contact" data-page="contact">
+	<header><h2 class="h2 article-title">Contact</h2></header>
+	<section class="mapbox" data-mapbox>
+		<figure><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31525.392410301563!2d80.27071899800796!3d13.082680125307692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5266ff0e9f4c67%3A0x383d8b830b1e90e7!2sChennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1664750740979!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></figure>
+	</section>
+	<section class="contact-form">
+		<h3 class="h3 form-title">Contact Form</h3>
+		<form action="https://formspree.io/f/xlevyqyb" method="POST" class="form" data-form>
+			<div class="input-wrapper">
+				<input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+				<input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+			</div>
+			<textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+			<button class="braun-button" type="submit" disabled data-form-btn>
+				<ion-icon name="paper-plane"></ion-icon>
+				<span>Send Message</span>
+			</button>
+		</form>
+	</section>
+</article>
+</div>
+</main>
+
+
+    
+    <!-- Easter Egg Trigger - Hidden clickable element -->
+    <div class="easter-egg-trigger" id="philosophy-trigger" title="✨ Hidden Design Philosophy"></div>
+    
+    <!-- Hidden Easter Egg - Design Philosophy Modal -->
+    <div id="design-philosophy-modal" class="easter-egg-modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content-large">
+            <button class="modal-close-btn" id="close-philosophy-modal">
+                <ion-icon name="close-outline"></ion-icon>
+            </button>
+            
+            <div class="braun-showcase">
+                <p class="showcase-subtitle">Exploring iconic Braun products that shaped modern design thinking</p>
+                
+                <div class="showcase-grid">
+                    <div class="product-card" data-product="sk4">
+                        <div class="product-image">
+                            <div class="product-placeholder sk4-placeholder">
+                                <div class="turntable-base"></div>
+                                <div class="turntable-arm"></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">SK 4 Record Player</h4>
+                            <p class="product-year">1956 • Dieter Rams & Hans Gugelot</p>
+                            <p class="product-principle">"Snow White's Coffin" - Transparent simplicity</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="t3">
+                        <div class="product-image">
+                            <div class="product-placeholder t3-placeholder">
+                                <div class="radio-body"></div>
+                                <div class="radio-speaker"></div>
+                                <div class="radio-controls"></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">T 3 Transistor Radio</h4>
+                            <p class="product-year">1958 • Dieter Rams</p>
+                            <p class="product-principle">Portable precision in minimal form</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="et66">
+                        <div class="product-image">
+                            <div class="product-placeholder et66-placeholder">
+                                <div class="calculator-body"></div>
+                                <div class="calculator-display"></div>
+                                <div class="calculator-buttons"></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">ET 66 Calculator</h4>
+                            <p class="product-year">1987 • Dietrich Lubs</p>
+                            <p class="product-principle">Function drives form perfectly</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="l2">
+                        <div class="product-image">
+                            <div class="product-placeholder l2-placeholder">
+                                <div class="speaker-cone"></div>
+                                <div class="speaker-grill"></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">L 2 Loudspeaker</h4>
+                            <p class="product-year">1958 • Dieter Rams</p>
+                            <p class="product-principle">Pure geometry, perfect acoustics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="design-principles">
+                    <h4 class="principles-title">Ten Principles of Good Design</h4>
+                    <div class="principles-grid">
+                        <div class="principle-item" data-principle="1">
+                            <span class="principle-number">01</span>
+                            <span class="principle-text">Good design is innovative</span>
+                        </div>
+                        <div class="principle-item" data-principle="2">
+                            <span class="principle-number">02</span>
+                            <span class="principle-text">Good design makes a product useful</span>
+                        </div>
+                        <div class="principle-item" data-principle="3">
+                            <span class="principle-number">03</span>
+                            <span class="principle-text">Good design is aesthetic</span>
+                        </div>
+                        <div class="principle-item" data-principle="4">
+                            <span class="principle-number">04</span>
+                            <span class="principle-text">Good design makes a product understandable</span>
+                        </div>
+                        <div class="principle-item" data-principle="5">
+                            <span class="principle-number">05</span>
+                            <span class="principle-text">Good design is unobtrusive</span>
+                        </div>
+                    </div>
+                    <button class="show-more-principles braun-button" data-show-more>
+                        <span>Show All Principles</span>
+                        <ion-icon name="chevron-down-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Preload ionicons -->
+    <link rel="preload" href="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" as="script">
+    
+    <!-- custom js link -->
+    <script src="/assets/js/script.js" defer></script>
+    
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

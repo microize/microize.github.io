@@ -1,0 +1,84 @@
+---
+title: "404 - Page Not Found"
+description: "404 Error - The requested page could not be found on Sripathi Mohanasundaram's portfolio website."
+layout: base.njk
+permalink: /404.html
+---
+
+<main class="error-page">
+    <div class="error-container">
+        <!-- Data Flow Game -->
+        <div class="game-section">
+            <div class="game-header">
+                <h2>Data Flow Interrupted</h2>
+                <p>Navigate the data stream while we debug this endpoint</p>
+            </div>
+            <div class="game-container">
+                <div class="game-ui">
+                    <div class="game-score">
+                        <span class="score-label">Score:</span>
+                        <span id="gameScore">0</span>
+                    </div>
+                    <div class="game-high-score">
+                        <span class="score-label">High:</span>
+                        <span id="highScore">0</span>
+                    </div>
+                </div>
+                <canvas id="dataFlowGame" width="600" height="150"></canvas>
+                <div class="game-controls">
+                    <div class="control-instruction">
+                        <span class="key">SPACE</span> or <span class="key">↑</span> to jump over errors
+                    </div>
+                    <div class="control-instruction">
+                        <span class="key">R</span> to restart after game over
+                    </div>
+                </div>
+                <div class="game-status" id="gameStatus">
+                    Press SPACE to start data flow
+                </div>
+            </div>
+        </div>
+        
+        <!-- Error Banner -->
+        <div class="error-banner">
+            <div class="error-header">
+                <h1 class="error-title">404 - Page Not Found</h1>
+                <p class="error-subtitle">The page you're looking for doesn't exist</p>
+            </div>
+            
+            <div class="error-actions">
+                <div class="action-buttons">
+                    <a href="/" class="braun-button primary">
+                        <ion-icon name="home-outline"></ion-icon>
+                        <span>Go Home</span>
+                    </a>
+                    <a href="/blog/" class="braun-button">
+                        <ion-icon name="library-outline"></ion-icon>
+                        <span>View Blog</span>
+                    </a>
+                    <button onclick="history.back()" class="braun-button">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                        <span>Go Back</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Easter egg console message for developers
+    console.log(`
+╔════════════════════════════════════════════════════════════════╗
+║  🤓 Hey fellow developer! You found the 404 page.             ║
+║                                                                ║
+║  This page was built with love by Sripathi.                   ║
+║  Check out the real code at: https://github.com/microize      ║
+║                                                                ║
+║  Fun fact: This site has an easter egg hidden somewhere...    ║
+║  Keep exploring! 🕵️                                           ║
+╚════════════════════════════════════════════════════════════════╝
+    `);
+</script>
+
+<script src="/assets/js/data-flow-game.js"></script>

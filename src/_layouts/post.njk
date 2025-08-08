@@ -1,0 +1,50 @@
+---
+layout: base.njk
+---
+
+<!-- Main -->
+<main>
+    <!-- Sidebar -->
+    {% include "sidebar.njk" %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Navbar hidden on blog posts for distraction-free reading -->
+
+        <!-- Blog Post Article -->
+        <article class="blog-post active" data-page="blog">
+            <header>
+                <h2 class="h2 article-title">{{ title }}</h2>
+                <!-- Date and reading time removed -->
+                {% if tags %}
+                <div class="blog-tags" style="margin-top: 16px;">
+                    {% for tag in tags %}
+                    <span class="tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </header>
+
+            <div class="blog-content">
+                {{ content | safe }}
+            </div>
+
+            <!-- Related Posts Section -->
+            <section class="related-posts">
+                <h3 class="related-posts-title">Related Articles</h3>
+                <div class="related-posts-grid" data-current-tags="{{ tags | join(',') }}" data-current-slug="{{ page.fileSlug }}">
+                    <!-- Related posts will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <footer class="blog-footer">
+                <nav class="blog-nav">
+                    <a href="/blog/" class="braun-button">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                        <span>Back to Blog</span>
+                    </a>
+                </nav>
+            </footer>
+        </article>
+    </div>
+</main>

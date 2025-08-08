@@ -1,0 +1,240 @@
+---
+layout: base.njk
+title: Blog
+pagination:
+  data: collections.posts
+  size: 6
+  alias: posts
+permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+---
+
+<!-- Scrolling Banner -->
+<div class="scrolling-banner">
+    <div class="banner-content">
+        <span class="banner-text" id="banner-text">
+This site is more than a portfolio – it's a blueprint of how I think and build<span class="separator">|</span>
+I believe great products live at the intersection of design, data, and human behavior<span class="separator">|</span>
+I lead with systems thinking, design clarity, and an obsession with outcomes<span class="separator">|</span>
+I’ve scaled data platforms, mentored engineering teams, and delivered GenAI capability<span class="separator">|</span>
+My approach blends aesthetics with architecture – built to solve, not just impress<span class="separator">|</span>
+I'm here to create lasting impact through meaningful, intelligent work<span class="separator">|</span>
+Somewhere in this site, there’s an easter egg – because great design rewards those who explore<span class="separator">|</span>
+</span>
+    </div>
+</div>
+
+<!-- Main -->
+<main>
+    <!-- Sidebar -->
+    <aside class="sidebar" data-sidebar>
+        <div class="sidebar-info">
+            <!-- Avatar Box -->
+            <figure class="avatar-box">
+                <img src="/assets/images/my-avatar.png" alt="Sripathi M" width="80">
+            </figure>
+            <div class="info-content">
+                <h1 class="name" title="Sripathi M">Sripathi M</h1>
+                <span class="title title-braun">Senior Data Engineer</span>
+            </div>
+            <button class="info_more-btn" data-sidebar-btn>
+                <span>Show Contacts</span>
+                <ion-icon name="chevron-down"></ion-icon>
+            </button>
+        </div>
+
+        <div class="sidebar-info_more">
+            <div class="separator"></div>
+
+            <ul class="social-list">
+                <li class="social-item">
+                    <a href="https://www.linkedin.com/in/sripathi-mohanasundaram/" class="social-link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://www.kaggle.com/microize" class="social-link">
+                        <ion-icon name="link-outline"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://github.com/microize" class="social-link">
+                        <ion-icon name="logo-github"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-item">
+                    <a href="https://twitter.com/SripathiMohana1" class="social-link">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="separator"></div>
+
+            <ul class="contacts-list">
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="mail-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">Email</p>
+                        <a href="mailto:3sripathi@gmail.com" class="contact-link">3sripathi@gmail.com</a>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="phone-portrait-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">Phone</p>
+                        <a href="tel:+917010271248" class="contact-link">+91-7010271248</a>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">D.O.B</p>
+                        <time datetime="1994-06-03">June 03, 1994</time>
+                    </div>
+                </li>
+                <li class="contact-item">
+                    <div class="icon-box">
+                        <ion-icon name="location-outline"></ion-icon>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-title">Location</p>
+                        <address>Chennai, Tamil Nadu, India</address>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <li class="navbar-item">
+                    <a href="/" class="navbar-link">About</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/" class="navbar-link" data-section="resume">Resume</a>
+                </li>
+                <li class="navbar-item">
+                    <a href="/" class="navbar-link" data-section="portfolio">Portfolio</a>
+                </li>
+                <li class="navbar-item">
+                    <button class="navbar-link active">Blog</button>
+                </li>
+                <li class="navbar-item">
+                    <a href="/" class="navbar-link" data-section="contact">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Blog Section -->
+        <article class="blog active" data-page="blog">
+            <header class="blog-header">
+                <h2 class="h2 article-title">Blog</h2>
+            </header>
+
+            <!-- Search Bar -->
+            <div class="blog-search">
+                <div class="search-wrapper">
+                    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+                    <input type="text" placeholder="Search articles..." class="search-input" id="blogSearch">
+                </div>
+                <div class="blog-filters">
+                    <button class="filter-tag active" data-filter="all">All</button>
+                    <button class="filter-tag" data-filter="leadership">Leadership</button>
+                    <button class="filter-tag" data-filter="azure">Azure</button>
+                    <button class="filter-tag" data-filter="data-engineering">Data Engineering</button>
+                    <button class="filter-tag" data-filter="genai">GenAI</button>
+                </div>
+            </div>
+
+            <!-- Blog Posts -->
+            <section class="blog-posts">
+                <ul class="blog-posts-list">
+                    {% for post in posts %}
+                    <li class="blog-post-item">
+                        <article class="blog-card simple-card" data-tags="{{ post.data.tags | join(',') }}">
+                            <div class="blog-card-content">
+                                <h3 class="blog-card-title">
+                                    <a href="{{ post.url }}" title="{{ post.data.title }}" class="truncated-title">
+                                        {{ post.data.title }}
+                                    </a>
+                                </h3>
+                                
+                                <!-- Date and reading time removed -->
+                                
+                                {% if post.data.tags %}
+                                <div class="blog-tags compact" style="margin-top: 12px;">
+                                    {% for tag in post.data.tags.slice(0, 3) %}
+                                    <span class="blog-tag">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="blog-card-footer">
+                                <a href="{{ post.url }}" class="read-more-btn">
+                                    <span>Read Article</span>
+                                    <ion-icon name="arrow-forward" class="read-more-icon"></ion-icon>
+                                </a>
+                            </div>
+                        </article>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Pagination -->
+                {% if pagination.href.previous or pagination.href.next %}
+                <nav class="pagination">
+                    <div class="pagination-info">
+                        <span>Page {{ pagination.pageNumber + 1 }} of {{ pagination.hrefs.length }}</span>
+                        <span class="pagination-separator">•</span>
+                        <span>{{ posts.length }} of {{ collections.posts.length }} articles</span>
+                    </div>
+                    
+                    <div class="pagination-controls">
+                        {% if pagination.href.previous %}
+                        <a href="{{ pagination.href.previous }}" class="pagination-btn pagination-prev">
+                            <ion-icon name="chevron-back"></ion-icon>
+                            <span>Previous</span>
+                        </a>
+                        {% endif %}
+                        
+                        <div class="pagination-numbers">
+                            {% for pageHref in pagination.hrefs %}
+                            <a href="{{ pageHref }}" class="pagination-number {% if loop.index0 == pagination.pageNumber %}active{% endif %}">
+                                {{ loop.index }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        
+                        {% if pagination.href.next %}
+                        <a href="{{ pagination.href.next }}" class="pagination-btn pagination-next">
+                            <span>Next</span>
+                            <ion-icon name="chevron-forward"></ion-icon>
+                        </a>
+                        {% endif %}
+                    </div>
+                </nav>
+                {% endif %}
+
+                {% if posts.length == 0 %}
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <ion-icon name="document-text-outline"></ion-icon>
+                    </div>
+                    <h3>No articles found</h3>
+                    <p>Try adjusting your search or filter criteria</p>
+                </div>
+                {% endif %}
+            </section>
+        </article>
+    </div>
+</main>

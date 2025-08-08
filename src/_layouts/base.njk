@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {% endif %}Sripathi Mohanasundaram - Personal Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/fav_log.ico" type="image/x-icon">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    {% if description %}
+    <meta name="description" content="{{ description }}">
+    {% endif %}
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% if title %}{{ title }}{% else %}Sripathi Mohanasundaram - Senior Data Engineer{% endif %}">
+    {% if description %}
+    <meta property="og:description" content="{{ description }}">
+    {% endif %}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url }}">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://microize.github.io/#person",
+          "name": "Sripathi Mohanasundaram",
+          "jobTitle": "Senior Data Engineer",
+          "description": "Senior Data Engineer with 8+ years transforming data landscapes across retail, energy, and tech sectors",
+          "url": "https://microize.github.io/",
+          "image": "https://microize.github.io/assets/images/my-avatar.png",
+          "sameAs": [
+            "https://www.linkedin.com/in/sripathi-mohanasundaram/",
+            "https://github.com/microize",
+            "https://www.kaggle.com/microize",
+            "https://twitter.com/SripathiMohana1"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Chennai",
+            "addressRegion": "Tamil Nadu",
+            "addressCountry": "India"
+          },
+          "alumniOf": "Anna University",
+          "knowsAbout": [
+            "Data Engineering",
+            "Azure",
+            "Python",
+            "Machine Learning",
+            "Databricks",
+            "GenAI",
+            "Leadership"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://microize.github.io/#website",
+          "url": "https://microize.github.io/",
+          "name": "Sripathi Mohanasundaram - Personal Portfolio",
+          "description": "Portfolio and blog of Sripathi Mohanasundaram, Senior Data Engineer specializing in AI, Azure, and data platform leadership",
+          "publisher": {
+            "@id": "https://microize.github.io/#person"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://microize.github.io/blog/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+        {% if title and page.url.includes('/blog/') %}
+        ,{
+          "@type": "Article",
+          "@id": "{{ page.url }}#article",
+          "headline": "{{ title }}",
+          "description": "{{ description or excerpt }}",
+          "author": {
+            "@id": "https://microize.github.io/#person"
+          },
+          "publisher": {
+            "@id": "https://microize.github.io/#person"
+          },
+          {% if date %}"datePublished": "{{ date | dateISO }}",
+          "dateModified": "{{ date | dateISO }}",{% endif %}
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ page.url }}"
+          },
+          "url": "{{ page.url }}",
+          {% if tags %}
+          "keywords": [
+            {% for tag in tags %}"{{ tag }}"{% if not loop.last %},{% endif %}{% endfor %}
+          ],
+          {% endif %}
+          "articleSection": "Technology",
+          "inLanguage": "en-US"
+        }
+        {% endif %}
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    {{ content | safe }}
+    
+    <!-- custom js link -->
+    <script src="/assets/js/script.js"></script>
+    
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
