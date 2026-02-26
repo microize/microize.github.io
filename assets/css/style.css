@@ -4569,8 +4569,7 @@ textarea.form-input::-webkit-resizer {
   }
 
   .contact-info :is(.contact-link) {
-    white-space: normal;
-    word-break: break-word;
+    white-space: nowrap;
   }
 
   .contact-info :is(.contact-link, time, address) {
