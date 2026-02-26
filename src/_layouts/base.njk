@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/assets/images/fav_log.ico" type="image/x-icon">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css?v=7">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +23,15 @@
     
     <!-- Open Graph -->
     <meta property="og:title" content="{% if title %}{{ title }}{% else %}Sripathi Mohanasundaram - Senior Data Engineer{% endif %}">
+    
+    <script>
+      // Prevent Flash of Unstyled Content
+      try {
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    </script>
     {% if description %}
     <meta property="og:description" content="{{ description }}">
     {% endif %}
@@ -116,7 +125,19 @@
 <body>
     {{ content | safe }}
     
+    <!-- Theme Toggle -->
+    <div class="theme-toggle-container" id="theme-toggle-wrapper">
+        <div class="theme-toggle" id="theme-toggle" role="button" tabindex="0" aria-label="Toggle dark mode">
+            <div class="theme-toggle-inner">
+                <div class="theme-toggle-circle"></div>
+                <ion-icon name="moon" class="theme-toggle-icon icon-moon-left"></ion-icon>
+                <ion-icon name="sunny" class="theme-toggle-icon icon-sun-right"></ion-icon>
+            </div>
+        </div>
+    </div>
+
     <!-- custom js link -->
+    <script src="/assets/js/theme.js"></script>
     <script src="/assets/js/script.js"></script>
     
     <!-- ionicon link -->

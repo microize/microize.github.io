@@ -6,7 +6,8 @@ tags: ["branding", "ui-ux-design", "trust-design", "medical-app", "vaidya-ai", "
 layout: post.njk
 image: "/assets/images/blog/vaidya-ai-branding.svg"
 ---
-<!-- ![Vaidya.ai Branding Design Process](/assets/images/blog/vaidya-ai-branding.svg) -->
+
+![Vaidya.ai Branding Design Process](/assets/images/blog/placeholder.png)
 In my [previous blog](/blog/2024-12-15-breaking-boundaries-comfort-zone-hackathon/), I shared how stepping out of my comfort zone during the Vaidya.ai hackathon became a journey of growth and discovery. This blog picks up from there, focusing on the next step: how our team approached the challenge of creating a brand that inspires trust and reliability.
 
 When Vaidya.ai's hackathon was launched during the kickoff meeting, the directive was clear: deliver a Gen Z appeal with a mobile-first approach. However, our vision extended beyond simply following trends. The key question driving our efforts was: **What would make Vaidya.ai stand out as a unique and trustworthy identity?**

@@ -6,7 +6,8 @@ tags: ["azure-openai", "api-optimization", "generative-ai", "performance", "cost
 layout: post.njk
 image: "/assets/images/blog/azure-api-optimization.svg"
 ---
-<!-- ![Azure API Optimization and AI Performance](/assets/images/blog/azure-api-optimization.svg) -->
+
+![Azure API Optimization and AI Performance](/assets/images/blog/placeholder.png)
 
 Imagine this: your Generative AI application is ready to shine, helping users in real-time… and then it slows to a crawl right when it's needed most.
 
