@@ -679,6 +679,14 @@ main {
   border-radius: var(--radius-md);
   border: none;
   box-shadow: var(--shadow-button);
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.avatar-box img {
+  border-radius: var(--radius-md);
+  transform: translateZ(20px);
 }
 
 .info-content .name {

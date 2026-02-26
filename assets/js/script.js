@@ -100,21 +100,21 @@ const filterFunc = function (selectedValue) {
 let lastClickedBtn = filterBtn && filterBtn.length > 0 ? filterBtn[0] : null;
 
 if (filterBtn && filterBtn.length > 0) {
-for (let i = 0; i < filterBtn.length; i++) {
+  for (let i = 0; i < filterBtn.length; i++) {
 
-  filterBtn[i].addEventListener("click", function () {
+    filterBtn[i].addEventListener("click", function () {
 
-    let selectedValue = this.innerText.toLowerCase();
-    if (selectValue) selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
+      let selectedValue = this.innerText.toLowerCase();
+      if (selectValue) selectValue.innerText = this.innerText;
+      filterFunc(selectedValue);
 
-    if (lastClickedBtn) lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
+      if (lastClickedBtn) lastClickedBtn.classList.remove("active");
+      this.classList.add("active");
+      lastClickedBtn = this;
 
-  });
+    });
 
-}
+  }
 }
 
 
@@ -146,7 +146,7 @@ if (form && formInputs && formBtn) {
 const blogNavLinks = document.querySelectorAll('a[data-section]');
 if (blogNavLinks.length > 0) {
   blogNavLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
       const section = this.getAttribute('data-section');
       // Navigate to main page with hash
@@ -155,6 +155,46 @@ if (blogNavLinks.length > 0) {
   });
 }
 
+// Profile Avatar 3D Mouse Tracking
+document.addEventListener('mousemove', (e) => {
+  const avatars = document.querySelectorAll('.avatar-box');
+  if (!avatars.length) return;
+
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+
+  avatars.forEach(avatar => {
+    // Get the center coordinates of the avatar
+    const rect = avatar.getBoundingClientRect();
+    const avatarCenterX = rect.left + rect.width / 2;
+    const avatarCenterY = rect.top + rect.height / 2;
+
+    // Calculate distance from mouse to center
+    const deltaX = mouseX - avatarCenterX;
+    const deltaY = mouseY - avatarCenterY;
+
+    // Calculate rotation angles (max tilt ~15 degrees)
+    // We reverse the deltaY for rotateX because moving mouse UP (negative deltaY) should tilt top BACK (positive rotateX)
+    const rotateX = (deltaY / window.innerHeight) * -45; // Max tilt up/down increased
+    const rotateY = (deltaX / window.innerWidth) * 45;   // Max tilt left/right increased
+
+    // Apply the 3D transform
+    // Limit the rotation so it doesn't break physics too much
+    const clampX = Math.max(-25, Math.min(25, rotateX));
+    const clampY = Math.max(-25, Math.min(25, rotateY));
+
+    avatar.style.transform = `perspective(800px) rotateX(${clampX}deg) rotateY(${clampY}deg) scale3d(1.05, 1.05, 1.05)`;
+  });
+});
+
+// Reset tilt when mouse leaves window
+document.addEventListener('mouseleave', () => {
+  const avatars = document.querySelectorAll('.avatar-box');
+  avatars.forEach(avatar => {
+    avatar.style.transform = `perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+  });
+});
+
 // Blog Search and Filter Functionality
 const blogSearch = document.getElementById('blogSearch');
 const filterTags = document.querySelectorAll('.filter-tag');
@@ -162,18 +202,18 @@ const blogCards = document.querySelectorAll('.blog-card');
 
 if (blogSearch && filterTags.length > 0 && blogCards.length > 0) {
   // Search functionality
-  blogSearch.addEventListener('input', function() {
+  blogSearch.addEventListener('input', function () {
     const searchTerm = this.value.toLowerCase();
     filterBlogPosts(searchTerm, getActiveFilter());
   });
 
   // Filter functionality
   filterTags.forEach(tag => {
-    tag.addEventListener('click', function() {
+    tag.addEventListener('click', function () {
       // Update active filter
       filterTags.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
-      
+
       const filterValue = this.getAttribute('data-filter');
       const searchTerm = blogSearch.value.toLowerCase();
       filterBlogPosts(searchTerm, filterValue);
@@ -191,12 +231,12 @@ if (blogSearch && filterTags.length > 0 && blogCards.length > 0) {
     blogCards.forEach(card => {
       const title = card.querySelector('.blog-card-title a').textContent.toLowerCase();
       const tags = card.getAttribute('data-tags') || '';
-      
-      const matchesSearch = !searchTerm || 
-        title.includes(searchTerm) || 
+
+      const matchesSearch = !searchTerm ||
+        title.includes(searchTerm) ||
         tags.toLowerCase().includes(searchTerm);
-      
-      const matchesFilter = filterValue === 'all' || 
+
+      const matchesFilter = filterValue === 'all' ||
         tags.toLowerCase().includes(filterValue.toLowerCase());
 
       if (matchesSearch && matchesFilter) {
@@ -210,7 +250,7 @@ if (blogSearch && filterTags.length > 0 && blogCards.length > 0) {
     // Show/hide empty state
     const emptyState = document.querySelector('.empty-state');
     const blogPostsList = document.querySelector('.blog-posts-list');
-    
+
     if (visibleCount === 0 && emptyState) {
       emptyState.style.display = 'block';
       if (blogPostsList) blogPostsList.style.display = 'none';
@@ -222,17 +262,17 @@ if (blogSearch && filterTags.length > 0 && blogCards.length > 0) {
 }
 
 // Enhanced Scrolling Banner with Perfect Endless Loop
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const banner = document.querySelector('.scrolling-banner');
   const bannerText = document.getElementById('banner-text');
-  
+
   if (banner && bannerText) {
     // Create perfect endless scroll by duplicating content
     const originalContent = bannerText.innerHTML;
     bannerText.innerHTML = originalContent + originalContent + originalContent;
-    
+
     // Enhanced click to copy functionality
-    banner.addEventListener('click', function() {
+    banner.addEventListener('click', function () {
       const quotes = [
         "This site is more than a portfolio - it's a blueprint of how I think and build.",
         "I believe great products live at the intersection of design, data, and human behavior.",
@@ -241,27 +281,27 @@ document.addEventListener('DOMContentLoaded', function() {
         "My approach blends aesthetics with architecture - built to solve, not just impress.",
         "I'm here to create lasting impact through meaningful, intelligent work.",
         "Somewhere in this site, there’s an easter egg - because great design rewards those who explore."
-              ];
+      ];
       const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      
+
       if (navigator.clipboard) {
         navigator.clipboard.writeText(randomQuote).then(() => {
           console.log('Quote copied to clipboard:', randomQuote);
         });
       }
     });
-    
+
   }
 });
 
 // MP3 Audio functionality for title-braun click
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const titleBraun = document.querySelector('.title-braun');
   let audio = null;
   let isPlaying = false;
 
   if (titleBraun) {
-    titleBraun.addEventListener('click', function() {
+    titleBraun.addEventListener('click', function () {
       if (!isPlaying) {
         playMP3();
         this.style.background = 'var(--primary)';
@@ -281,21 +321,21 @@ document.addEventListener('DOMContentLoaded', function() {
       // Create audio element and play song_1.mp3
       audio = new Audio('/assets/audio/song_1.mp3');
       audio.volume = 0.7; // Set volume to 70%
-      
+
       // Handle when song ends
-      audio.addEventListener('ended', function() {
+      audio.addEventListener('ended', function () {
         stopMP3();
       });
-      
+
       // Handle loading errors
-      audio.addEventListener('error', function() {
+      audio.addEventListener('error', function () {
         console.log('Audio file not found or failed to load');
         stopMP3();
       });
-      
+
       audio.play();
       isPlaying = true;
-      
+
     } catch (error) {
       console.log('Audio not supported');
       // Fallback visual feedback
@@ -308,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 2000);
     }
   }
-  
+
   function stopMP3() {
     isPlaying = false;
     if (audio) {
@@ -316,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
       audio.currentTime = 0;
       audio = null;
     }
-    
+
     // Reset visual state
     titleBraun.style.background = 'var(--surface)';
     titleBraun.style.color = 'var(--text-secondary)';
@@ -325,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Scroll to Top Button - Easter Egg Style
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Create scroll to top button
   const scrollButton = document.createElement('div');
   scrollButton.className = 'scroll-to-top';
@@ -333,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(scrollButton);
 
   // Show/hide button based on scroll position
-  window.addEventListener('scroll', function() {
+  window.addEventListener('scroll', function () {
     if (window.pageYOffset > 300) {
       scrollButton.classList.add('visible');
     } else {
@@ -342,10 +382,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Easter egg click animation and scroll functionality
-  scrollButton.addEventListener('click', function() {
+  scrollButton.addEventListener('click', function () {
     // Add easter egg animation
     this.classList.add('clicked');
-    
+
     // Remove animation class after animation completes
     setTimeout(() => {
       this.classList.remove('clicked');
@@ -359,23 +399,23 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Optional: Add a subtle hover sound effect (very quiet)
-  scrollButton.addEventListener('mouseenter', function() {
+  scrollButton.addEventListener('mouseenter', function () {
     if (window.AudioContext || window.webkitAudioContext) {
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        
+
         oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
         oscillator.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
-        
+
         gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
         gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-        
+
         oscillator.start();
         oscillator.stop(audioCtx.currentTime + 0.1);
       } catch (e) {
@@ -387,10 +427,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Reading Time Calculator
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const readingTimeElements = document.querySelectorAll('.reading-time');
-  
-  readingTimeElements.forEach(function(element) {
+
+  readingTimeElements.forEach(function (element) {
     const content = element.getAttribute('data-content');
     if (content) {
       const readingTime = calculateReadingTime(content);
@@ -404,19 +444,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-  
+
   function calculateReadingTime(text) {
     // Remove HTML tags and get plain text
     const plainText = text.replace(/<[^>]*>/g, '');
-    
+
     // Count words (split by whitespace and filter empty strings)
     const words = plainText.split(/\s+/).filter(word => word.length > 0);
     const wordCount = words.length;
-    
+
     // Average reading speed: 200 words per minute
     const wordsPerMinute = 200;
     const minutes = Math.ceil(wordCount / wordsPerMinute);
-    
+
     if (minutes === 1) {
       return '1 min read';
     } else if (minutes < 1) {
@@ -428,13 +468,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Related Posts Functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const relatedPostsGrid = document.querySelector('.related-posts-grid');
-  
+
   if (relatedPostsGrid) {
     const currentTags = relatedPostsGrid.getAttribute('data-current-tags');
     const currentSlug = relatedPostsGrid.getAttribute('data-current-slug');
-    
+
     // Your actual blog posts data
     const allPosts = [
       {
@@ -459,19 +499,19 @@ document.addEventListener('DOMContentLoaded', function() {
         tags: ['branding', 'ui-ux-design', 'trust-design', 'medical-app', 'vaidya-ai', 'hackathon']
       }
     ];
-    
+
     // Find related posts based on shared tags
     const currentTagsArray = currentTags ? currentTags.split(',') : [];
     const relatedPosts = findRelatedPosts(allPosts, currentTagsArray, currentSlug);
-    
+
     // Display related posts
     displayRelatedPosts(relatedPosts, relatedPostsGrid);
   }
-  
+
   function findRelatedPosts(posts, currentTags, currentSlug, maxResults = 2) {
     // Filter out current post first
     const otherPosts = posts.filter(post => post.slug !== currentSlug);
-    
+
     // Score posts based on shared tags
     const scored = otherPosts.map(post => {
       const commonTags = post.tags.filter(tag => currentTags.includes(tag));
@@ -480,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
         score: commonTags.length
       };
     });
-    
+
     // Sort by relevance (posts with shared tags first, then by date)
     scored.sort((a, b) => {
       if (a.score !== b.score) {
@@ -488,17 +528,17 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       return new Date(b.date) - new Date(a.date); // Newer posts first if same score
     });
-    
+
     // Return up to maxResults posts (or all available if fewer)
     return scored.slice(0, Math.min(maxResults, scored.length));
   }
-  
+
   function displayRelatedPosts(posts, container) {
     if (posts.length === 0) {
       container.innerHTML = '<p style="color: var(--text-secondary); font-style: italic;">No related articles found.</p>';
       return;
     }
-    
+
     const postsHTML = posts.map(post => `
       <a href="/blog/${post.slug}/" class="related-post-card">
         <h4 class="related-post-title">${post.title}</h4>
@@ -509,29 +549,29 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </a>
     `).join('');
-    
+
     container.innerHTML = postsHTML;
   }
-  
+
   function formatDate(dateString) {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   }
 });
 
 // Scroll-triggered Animations and Micro-interactions
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Initialize Intersection Observer for scroll animations
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   };
 
-  const observer = new IntersectionObserver(function(entries) {
+  const observer = new IntersectionObserver(function (entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -579,19 +619,19 @@ document.addEventListener('DOMContentLoaded', function() {
   // Enhanced image loading with fade-in effect and lazy loading
   function initImageLoading() {
     const images = document.querySelectorAll('img');
-    
+
     // Intersection Observer for lazy loading
     const imageObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const img = entry.target;
-          
+
           // Load the image if it has a data-src attribute
           if (img.dataset.src) {
             img.src = img.dataset.src;
             img.removeAttribute('data-src');
           }
-          
+
           // Stop observing this image
           imageObserver.unobserve(img);
         }
@@ -599,21 +639,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }, {
       rootMargin: '50px'
     });
-    
+
     images.forEach(img => {
       img.setAttribute('data-loaded', 'false');
-      
+
       // Set up lazy loading for images not in viewport
       if (img.getBoundingClientRect().top > window.innerHeight) {
         img.dataset.src = img.src;
         img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
         imageObserver.observe(img);
       }
-      
+
       if (img.complete) {
         img.setAttribute('data-loaded', 'true');
       } else {
-        img.addEventListener('load', function() {
+        img.addEventListener('load', function () {
           this.setAttribute('data-loaded', 'true');
         });
       }
@@ -624,15 +664,15 @@ document.addEventListener('DOMContentLoaded', function() {
   function initButtonInteractions() {
     const buttons = document.querySelectorAll('button, .braun-button, .filter-tag');
     buttons.forEach(button => {
-      button.addEventListener('mousedown', function() {
+      button.addEventListener('mousedown', function () {
         this.style.transform = 'scale(0.95)';
       });
-      
-      button.addEventListener('mouseup', function() {
+
+      button.addEventListener('mouseup', function () {
         this.style.transform = '';
       });
-      
-      button.addEventListener('mouseleave', function() {
+
+      button.addEventListener('mouseleave', function () {
         this.style.transform = '';
       });
     });
@@ -642,7 +682,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function initSmoothScrolling() {
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach(link => {
-      link.addEventListener('click', function(e) {
+      link.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -672,11 +712,11 @@ document.addEventListener('DOMContentLoaded', function() {
       text-decoration: none;
       font-family: var(--ff-mono);
     `;
-    skipLink.addEventListener('focus', function() {
+    skipLink.addEventListener('focus', function () {
       this.style.left = '10px';
       this.style.top = '10px';
     });
-    skipLink.addEventListener('blur', function() {
+    skipLink.addEventListener('blur', function () {
       this.style.left = '-9999px';
     });
     document.body.insertBefore(skipLink, document.body.firstChild);
@@ -688,7 +728,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Enhanced focus management
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       // ESC key to close modals or overlays
       if (e.key === 'Escape') {
         const activeModal = document.querySelector('.modal.active, .overlay.active');
@@ -703,9 +743,9 @@ document.addEventListener('DOMContentLoaded', function() {
     interactiveElements.forEach(el => {
       if (!el.textContent.trim() && !el.getAttribute('aria-label')) {
         // Try to get context from parent or nearby elements
-        const context = el.closest('[data-section]')?.getAttribute('data-section') || 
-                       el.className.split(' ')[0] || 
-                       'Interactive element';
+        const context = el.closest('[data-section]')?.getAttribute('data-section') ||
+          el.className.split(' ')[0] ||
+          'Interactive element';
         el.setAttribute('aria-label', context);
       }
     });
@@ -730,7 +770,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initAccessibility();
 
   // Make new elements visible immediately when added (for dynamic content)
-  const mutationObserver = new MutationObserver(function(mutations) {
+  const mutationObserver = new MutationObserver(function (mutations) {
     mutations.forEach(mutation => {
       if (mutation.type === 'childList') {
         mutation.addedNodes.forEach(node => {
@@ -752,30 +792,30 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Konami Code Easter Egg - ↑↑↓↓←→←→BA
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const konamiCode = [
-    'ArrowUp', 'ArrowUp', 
+    'ArrowUp', 'ArrowUp',
     'ArrowDown', 'ArrowDown',
-    'ArrowLeft', 'ArrowRight', 
+    'ArrowLeft', 'ArrowRight',
     'ArrowLeft', 'ArrowRight',
     'KeyB', 'KeyA'
   ];
-  
+
   let userInput = [];
   let konamiActivated = false;
 
-  document.addEventListener('keydown', function(e) {
+  document.addEventListener('keydown', function (e) {
     userInput.push(e.code);
-    
+
     // Keep only the last 10 key presses
     if (userInput.length > konamiCode.length) {
       userInput = userInput.slice(-konamiCode.length);
     }
-    
+
     // Check if the sequence matches
-    if (userInput.length === konamiCode.length && 
-        userInput.every((key, index) => key === konamiCode[index])) {
-      
+    if (userInput.length === konamiCode.length &&
+      userInput.every((key, index) => key === konamiCode[index])) {
+
       if (!konamiActivated) {
         activateKonamiMode();
         konamiActivated = true;
@@ -786,18 +826,18 @@ document.addEventListener('DOMContentLoaded', function() {
   function activateKonamiMode() {
     // Create magical notification
     showKonamiNotification();
-    
+
     // Activate special design mode
     document.body.classList.add('konami-activated');
-    
+
     // Enhanced animations
     enableEnhancedAnimations();
-    
+
     // Secret Braun mode
     setTimeout(() => {
       showBraunSecrets();
     }, 2000);
-    
+
     // Play special sound sequence
     playKonamiSound();
   }
@@ -917,7 +957,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const randomQuote = designQuotes[Math.floor(Math.random() * designQuotes.length)];
-    
+
     // Create floating quote
     const quote = document.createElement('div');
     quote.className = 'floating-quote';
@@ -937,20 +977,20 @@ document.addEventListener('DOMContentLoaded', function() {
       animation: floatIn 3s ease;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     `;
-    
+
     const floatInKeyframes = `
       @keyframes floatIn {
         0% { opacity: 0; transform: translateX(100px) rotate(5deg); }
         100% { opacity: 1; transform: translateX(0) rotate(0deg); }
       }
     `;
-    
+
     const style = document.createElement('style');
     style.textContent = floatInKeyframes;
     document.head.appendChild(style);
-    
+
     document.body.appendChild(quote);
-    
+
     setTimeout(() => {
       quote.remove();
     }, 5000);
@@ -960,24 +1000,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.AudioContext || window.webkitAudioContext) {
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
+
         // Play ascending major scale (celebration sound)
         const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25]; // C major scale
-        
+
         notes.forEach((freq, index) => {
           const oscillator = audioCtx.createOscillator();
           const gainNode = audioCtx.createGain();
-          
+
           oscillator.connect(gainNode);
           gainNode.connect(audioCtx.destination);
-          
+
           oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime + index * 0.15);
           oscillator.type = 'sine';
-          
+
           gainNode.gain.setValueAtTime(0, audioCtx.currentTime + index * 0.15);
           gainNode.gain.exponentialRampToValueAtTime(0.1, audioCtx.currentTime + index * 0.15 + 0.05);
           gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + index * 0.15 + 0.3);
-          
+
           oscillator.start(audioCtx.currentTime + index * 0.15);
           oscillator.stop(audioCtx.currentTime + index * 0.15 + 0.3);
         });
@@ -994,7 +1034,7 @@ const pages = document.querySelectorAll("[data-page]");
 
 // add event to all nav link
 if (navigationLinks && pages) {
-  
+
   // Function to show a specific page
   function showPage(pageName) {
     for (let j = 0; j < pages.length; j++) {
@@ -1014,7 +1054,7 @@ if (navigationLinks && pages) {
       }
     }
   }
-  
+
   // Handle hash navigation on page load
   function handleHashNavigation() {
     const hash = window.location.hash.substring(1); // Remove #
@@ -1022,11 +1062,11 @@ if (navigationLinks && pages) {
       showPage(hash);
     }
   }
-  
+
   // Check for hash on page load
   window.addEventListener('load', handleHashNavigation);
   window.addEventListener('hashchange', handleHashNavigation);
-  
+
   // Handle initial hash if page is already loaded
   if (document.readyState === 'complete') {
     handleHashNavigation();
@@ -1041,7 +1081,7 @@ if (navigationLinks && pages) {
 
       const pageName = this.innerHTML.toLowerCase();
       showPage(pageName);
-      
+
       // Update URL hash
       window.history.pushState(null, null, `#${pageName}`);
 
@@ -1050,12 +1090,12 @@ if (navigationLinks && pages) {
 }
 
 // ===== BRAUN PRODUCT SHOWCASE INTERACTIONS =====
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Product card interactions
   const productCards = document.querySelectorAll('.product-card');
   const showMoreBtn = document.querySelector('.show-more-principles');
   const designPrinciples = document.querySelector('.design-principles');
-  
+
   // Additional principles data (6-10)
   const additionalPrinciples = [
     { number: '06', text: 'Good design is honest' },
@@ -1064,7 +1104,7 @@ document.addEventListener('DOMContentLoaded', function() {
     { number: '09', text: 'Good design is environmentally-friendly' },
     { number: '10', text: 'Good design is as little design as possible' }
   ];
-  
+
   // Product details for interactive tooltips
   const productDetails = {
     sk4: {
@@ -1096,36 +1136,36 @@ document.addEventListener('DOMContentLoaded', function() {
       influence: 'Established the template for modern speaker design and influenced audio equipment aesthetics.'
     }
   };
-  
+
   // Product cards are now display-only (no click handlers for cleaner experience)
-  
+
   // Show more principles functionality
   if (showMoreBtn && designPrinciples) {
-    showMoreBtn.addEventListener('click', function() {
+    showMoreBtn.addEventListener('click', function () {
       const isExpanded = designPrinciples.classList.contains('principles-expanded');
-      
+
       if (!isExpanded) {
         // Add remaining principles
         const principlesGrid = document.querySelector('.principles-grid');
-        
+
         additionalPrinciples.forEach(principle => {
           const principleItem = document.createElement('div');
           principleItem.className = 'principle-item principles-hidden';
           principleItem.setAttribute('data-principle', principle.number);
-          
+
           principleItem.innerHTML = `
             <span class="principle-number">${principle.number}</span>
             <span class="principle-text">${principle.text}</span>
           `;
-          
+
           principlesGrid.appendChild(principleItem);
-          
+
           // Removed hover sound effect for cleaner experience
         });
-        
+
         designPrinciples.classList.add('principles-expanded');
         this.querySelector('span').textContent = 'Show Less';
-        
+
         // Animate in the new principles
         setTimeout(() => {
           document.querySelectorAll('.principles-hidden').forEach((item, index) => {
@@ -1135,22 +1175,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }, index * 100);
           });
         }, 50);
-        
+
       } else {
         // Remove additional principles
         document.querySelectorAll('.principles-hidden').forEach(item => {
           item.remove();
         });
-        
+
         designPrinciples.classList.remove('principles-expanded');
         this.querySelector('span').textContent = 'Show All Principles';
       }
-      
+
       playSubtleClick();
     });
   }
-  
-  
+
+
   // Subtle audio feedback for Braun aesthetic
   function playSubtleClick() {
     if (window.AudioContext || window.webkitAudioContext) {
@@ -1158,18 +1198,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        
+
         // Very subtle, high-frequency click (Braun-inspired)
         oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime);
         oscillator.type = 'sine';
-        
+
         gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.01);
         gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-        
+
         oscillator.start(audioCtx.currentTime);
         oscillator.stop(audioCtx.currentTime + 0.05);
       } catch (e) {
@@ -1177,7 +1217,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
+
   // Add scroll-triggered animations for the showcase
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1189,7 +1229,7 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.transform = 'translateY(0)';
           }, index * 150);
         });
-        
+
         // Add stagger animation to principles
         const principles = entry.target.querySelectorAll('.principle-item');
         principles.forEach((principle, index) => {
@@ -1201,7 +1241,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }, { threshold: 0.2 });
-  
+
   const showcase = document.querySelector('.braun-showcase');
   if (showcase) {
     // Set initial state for animation
@@ -1210,24 +1250,24 @@ document.addEventListener('DOMContentLoaded', function() {
       card.style.transform = 'translateY(30px)';
       card.style.transition = 'all 0.6s ease';
     });
-    
+
     showcase.querySelectorAll('.principle-item').forEach(principle => {
       principle.style.opacity = '0';
       principle.style.transform = 'translateX(-20px)';
       principle.style.transition = 'all 0.4s ease';
     });
-    
+
     observer.observe(showcase);
   }
 });
 
 // Easter Egg Philosophy Modal
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const trigger = document.getElementById('philosophy-trigger');
   const modal = document.getElementById('design-philosophy-modal');
   const closeBtn = document.getElementById('close-philosophy-modal');
   const navigationLinks = document.querySelectorAll("[data-nav-link]");
-  
+
   // Function to show/hide easter egg based on active page
   function updateEasterEggVisibility() {
     const contactPage = document.querySelector('[data-page="contact"]');
@@ -1237,21 +1277,21 @@ document.addEventListener('DOMContentLoaded', function() {
       trigger.classList.remove('visible');
     }
   }
-  
+
   if (trigger && modal) {
     console.log('Easter egg elements found:', trigger, modal); // Debug log
     // Initial visibility check
     updateEasterEggVisibility();
-    
+
     // Watch for page changes
     navigationLinks.forEach(link => {
-      link.addEventListener('click', function() {
+      link.addEventListener('click', function () {
         setTimeout(updateEasterEggVisibility, 100); // Small delay to ensure page change completes
       });
     });
-    
+
     // Open modal
-    trigger.addEventListener('click', function() {
+    trigger.addEventListener('click', function () {
       console.log('Easter egg clicked!'); // Debug log
       console.log('Modal element:', modal);
       console.log('Modal computed style:', window.getComputedStyle(modal));
@@ -1262,28 +1302,28 @@ document.addEventListener('DOMContentLoaded', function() {
       modal.style.visibility = 'visible';
       modal.style.zIndex = '99999';
     });
-    
+
     // Close modal
     function closeModal() {
       console.log('Closing modal'); // Debug log
-      modal.classList.remove('active');  
+      modal.classList.remove('active');
       modal.style.display = 'none';
       document.body.style.overflow = '';
     }
-    
+
     if (closeBtn) {
       closeBtn.addEventListener('click', closeModal);
     }
-    
+
     // Close on overlay click
-    modal.addEventListener('click', function(e) {
+    modal.addEventListener('click', function (e) {
       if (e.target === modal) {
         closeModal();
       }
     });
-    
+
     // Close on ESC key
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && modal.classList.contains('active')) {
         closeModal();
       }
