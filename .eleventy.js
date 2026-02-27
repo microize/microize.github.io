@@ -1,6 +1,6 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
   // Add plugins
   eleventyConfig.addPlugin(syntaxHighlight);
 
@@ -17,7 +17,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("CNAME");
 
   // Date filters
-  eleventyConfig.addFilter("dateDisplay", function(date) {
+  eleventyConfig.addFilter("dateDisplay", function (date) {
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',
       month: 'long',
@@ -25,21 +25,21 @@ module.exports = function(eleventyConfig) {
     }).format(date);
   });
 
-  eleventyConfig.addFilter("dateISO", function(date) {
+  eleventyConfig.addFilter("dateISO", function (date) {
     return new Date(date).toISOString();
   });
 
   // Collections
-  eleventyConfig.addCollection("posts", function(collectionApi) {
+  eleventyConfig.addCollection("posts", function (collectionApi) {
     return collectionApi.getFilteredByGlob("blog/**/*.md").reverse();
   });
 
-  eleventyConfig.addCollection("recentPosts", function(collectionApi) {
+  eleventyConfig.addCollection("recentPosts", function (collectionApi) {
     return collectionApi.getFilteredByGlob("blog/**/*.md").reverse().slice(0, 3);
   });
 
   // Search collection (without templateContent)
-  eleventyConfig.addCollection("searchPosts", function(collectionApi) {
+  eleventyConfig.addCollection("searchPosts", function (collectionApi) {
     return collectionApi.getFilteredByGlob("blog/**/*.md").map(post => ({
       title: post.data.title,
       excerpt: post.data.excerpt || "",
@@ -50,7 +50,7 @@ module.exports = function(eleventyConfig) {
   });
 
   // Custom filters
-  eleventyConfig.addFilter("excerpt", function(post) {
+  eleventyConfig.addFilter("excerpt", function (post) {
     const content = post.replace(/(<([^>]+)>)/gi, "");
     return content.substr(0, 200) + (content.length > 200 ? "..." : "");
   });
@@ -58,7 +58,7 @@ module.exports = function(eleventyConfig) {
   // Markdown configuration
   const markdownIt = require("markdown-it");
   const markdownItAnchor = require("markdown-it-anchor");
-  
+
   const markdownLib = markdownIt({
     html: true,
     breaks: true,
@@ -66,8 +66,21 @@ module.exports = function(eleventyConfig) {
   }).use(markdownItAnchor, {
     permalink: markdownItAnchor.permalink.headerLink()
   });
-  
+
   eleventyConfig.setLibrary("md", markdownLib);
+
+  const htmlmin = require("html-minifier");
+  eleventyConfig.addTransform("htmlmin", function (content, outputPath) {
+    if (outputPath && outputPath.endsWith(".html")) {
+      let minified = htmlmin.minify(content, {
+        useShortDoctype: true,
+        removeComments: true,
+        collapseWhitespace: true
+      });
+      return minified;
+    }
+    return content;
+  });
 
   return {
     dir: {

@@ -5568,11 +5568,6 @@ img[data-loaded="true"] {
   }
 }
 
-position: absolute;
-bottom: 8px;
-right: 8px;
-}
-
 /* ET66 Calculator */
 .et66-placeholder {
   background: var(--text-secondary);

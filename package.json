@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Sripathi Mohanasundaram's Data Engineering Portfolio",
   "scripts": {
-    "build": "eleventy",
+    "build:eleventy": "eleventy",
+    "build:css": "cleancss -o _site/assets/css/style.css assets/css/style.css",
+    "build:js": "terser assets/js/script.js -o _site/assets/js/script.js -c -m && terser assets/js/theme.js -o _site/assets/js/theme.js -c -m",
+    "build": "npm run build:eleventy && npm run build:css && npm run build:js",
     "serve": "eleventy --serve",
     "start": "eleventy --serve",
     "debug": "DEBUG=Eleventy* eleventy"
@@ -21,5 +24,10 @@
     "blog"
   ],
   "author": "Sripathi Mohanasundaram",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "html-minifier": "^4.0.0",
+    "terser": "^5.46.0"
+  }
 }
