@@ -1,23 +1,16 @@
 ---
 title: "Stop Guessing: A Smarter Way to Build Software with AI"
-date: 2024-12-15
-excerpt: "How our team created a trustworthy brand identity for Vaidya.ai through strategic design choices, clinical-grade aesthetics, and user-centered approach during the hackathon."
-tags: ["branding", "ui-ux-design", "trust-design", "medical-app", "vaidya-ai", "hackathon"]
+date: 2026-03-05
+excerpt: "Spec‑Driven Development means writing a short plan (called a **specification** or **spec**) before asking the AI to generate code."
+tags: ["enterprise-ai", "generative-ai", "software-development"]
 layout: post.njk
-image: "/assets/images/blog/vaidya-ai-branding.svg"
+image: ""
 ---
+Many developers today use AI tools to generate code. You type something like "create a login page" and the AI quickly generates code. At first this feels powerful. 
 
-Many developers today use AI tools to generate code. You type something like "create a login page" and the AI quickly generates code. At first this feels powerful.
+But after a few minutes the problems start. The AI may use libraries you did not want. Files may be placed in strange folders. Features you never asked for suddenly appear. Instead of building your product, you spend time fixing the AI's assumptions. This happens because the AI is guessing what you want.
 
-But after a few minutes the problems start.
-
-The AI may use libraries you did not want. Files may be placed in strange folders. Features you never asked for suddenly appear. Instead of building your product, you spend time fixing the AI's assumptions.
-
-This happens because the AI is guessing what you want.
-
-The solution is simple: give the AI a clear plan before it starts writing code.
-
-This approach is called **Spec‑Driven Development**.
+The solution is simple: give the AI a clear plan before it starts writing code, This approach is called **Spec‑Driven Development**.
 
 ---
 
@@ -32,21 +25,13 @@ The spec explains:
 * what the AI must avoid
 * the exact tasks required to complete the feature
 
-Instead of guessing, the AI follows instructions.
-
-Think of the spec as a **contract between you and the AI**.
+Instead of guessing, the AI follows instructions. Think of the spec as a **contract between you and the AI**.
 
 ---
 
 # Why Specs Matter
 
-When humans code alone, many decisions stay in their head.
-
-But AI cannot read your thoughts.
-
-If you say:
-
-"Add authentication"
+When humans code alone, many decisions stay in their head. But AI cannot read your thoughts. If you say: "Add authentication"
 
 The AI must guess:
 
@@ -55,22 +40,16 @@ The AI must guess:
 * whether OAuth should be added
 * whether password reset should exist
 
-Those guesses often create messy code.
-
-A spec removes the guessing by defining the rules before coding begins.
+Those guesses often create messy code. A spec removes the guessing by defining the rules before coding begins.
 
 ---
 
 # Simple Comparison
 
-| Approach                | How it starts      | Result             |
-| ----------------------- | ------------------ | ------------------ |
-| Vibe Coding             | Short vague prompt | Unpredictable code |
-| Spec‑Driven Development | Clear written plan | Controlled output  |
+* Vibe Coding : Short vague prompt ---> Unpredictable code
+* Spec‑Driven Development : Clear written plan ---> Controlled output  
 
-The difference is not the AI.
-
-The difference is the **clarity of the instructions**.
+The difference is not the AI. The difference is the **clarity of the instructions**.
 
 ---
 
@@ -119,11 +98,7 @@ This file becomes the **source of truth** for the AI.
 
 # Example: Building a Simple Task Manager
 
-Imagine you want a small web app where users can add daily tasks and mark them as complete.
-
-Instead of saying:
-
-"Create a task manager"
+Imagine you want a small web app where users can add daily tasks and mark them as complete. Instead of saying: "Create a task manager"
 
 You write a clear spec.
 
@@ -176,19 +151,15 @@ Files: src/hooks/useLocalStorage.js
 Verify: tasks remain after refreshing the page
 ```
 
-Now the AI does not guess.
-
-It simply executes the tasks.
+Now the AI does not guess. It simply executes the tasks.
 
 ---
 
 # Who Writes the Spec?
 
-You usually do **not** write the entire spec manually.
+You usually do not write the entire spec manually. AI can generate the first draft.
 
-AI can generate the first draft.
-
-Typical workflow:
+**Typical workflow**:
 
 1. Describe the feature to the AI.
 2. The AI generates the spec draft.
@@ -201,9 +172,7 @@ You might adjust:
 * constraints
 * features that should not exist
 
-Think of the AI as a **fast junior engineer writing the first draft**.
-
-After the spec is finalized, the use AI executes the tasks one by one and commit to git.
+Think of the AI as a **fast junior engineer writing the first draft**. After the spec is finalized, the use AI executes the tasks one by one and commit to git.
 
 ---
 
@@ -211,9 +180,9 @@ After the spec is finalized, the use AI executes the tasks one by one and commit
 
 A typical spec‑driven workflow looks like this:
 
-Spec → Review → Execute Task → Verify → Commit → Repeat
+    Spec → Review → Execute Task → Verify → Commit → Repeat
 
-Steps:
+**Steps**:
 
 1. Generate a spec
 2. Review and refine it
@@ -267,10 +236,7 @@ Save this as `.ai/templates/spec.md` in your repo:
 ### 2. Generate a spec
 
 Read `.ai/templates/spec.md` and generate a spec for your feature.
-
-Example instruction to the AI:
-
-"Read `.ai/templates/spec.md` and generate a spec for: [describe your feature]. Save it to `.ai/specs/[feature-name].md`."
+Example instruction to the AI: "Read `.ai/templates/spec.md` and generate a spec for: [describe your feature]. Save it to `.ai/specs/[feature-name].md`."
 
 ### 3. Review and refine
 
@@ -279,10 +245,7 @@ Open the generated spec and review it carefully. Make sure the architectural dec
 ### 4. Execute tasks
 
 Ask the AI to read the spec and implement the first task.
-
-Example:
-
-"Read `.ai/specs/[feature-name].md` and implement **T1 only**."
+Example: "Read `.ai/specs/[feature-name].md` and implement **T1 only**."
 
 ### 5. Review, iterate, commit
 
@@ -326,22 +289,12 @@ Enterprise systems often have strict constraints such as security rules, approve
 
 # Credit
 
-The workflow and ideas in this article are inspired by tutorials and explanations created by **Owain Lewis** in his Spec‑Driven Development guides and videos.
-
-His work demonstrates how AI agents can reliably build software when guided by structured specifications.
+The workflow and ideas in this article are inspired by tutorials and explanations created by **Owain Lewis** in his Spec‑Driven Development guides and videos. His work demonstrates how AI agents can reliably build software when guided by structured specifications.
 
 ---
 
 # Final Thoughts
 
-AI coding tools are powerful, but they work best with clear instructions.
+AI coding tools are powerful, but they work best with clear instructions. Without a specification the AI must guess. With a specification the AI follows a plan.
 
-Without a specification the AI must guess.
-
-With a specification the AI follows a plan.
-
-Spec‑Driven Development simply moves thinking earlier in the process so AI agents can execute work more reliably.
-
-A single specification file can turn AI from a guessing machine into a dependable engineering assistant.
-
-<br>
+Spec‑Driven Development simply moves thinking earlier in the process so AI agents can execute work more reliably. A single specification file can turn AI from a guessing machine into a dependable engineering assistant.

@@ -2,7 +2,7 @@
 title: "Breaking Boundaries: Stepping Out of My Comfort Zone"
 date: 2024-12-15
 excerpt: "My journey through a UI/UX hackathon where I embraced new challenges, learned Figma and React, and discovered the transformative power of stepping outside your comfort zone."
-tags: ["hackathon", "ui-ux-design", "personal-growth", "react", "figma", "comfort-zone"]
+tags: ["branding", "ui-ux-design", "trust-design", "hackathon"]
 layout: post.njk
 image: "/assets/images/blog/hackathon-comfort-zone.svg"
 ---

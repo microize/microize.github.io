@@ -2,7 +2,7 @@
 title: "Avoiding AI Bottlenecks: How I Fixed API Call Chaos on Azure and Boosted Generative AI Performance"
 date: 2025-01-29
 excerpt: "Learn how to fix API call chaos and boost Generative AI performance through smarter API management and Azure optimization techniques."
-tags: ["azure-openai", "api-optimization", "generative-ai", "performance", "cost-optimization"]
+tags: ["enterprise-ai", "generative-ai", "performance", "cost-optimization"]
 layout: post.njk
 image: "/assets/images/blog/azure-api-optimization.svg"
 ---

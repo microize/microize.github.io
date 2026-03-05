@@ -2,7 +2,7 @@
 title: "Branding: Redefining Trust and Reliability for Vaidya.ai"
 date: 2024-12-15
 excerpt: "How our team created a trustworthy brand identity for Vaidya.ai through strategic design choices, clinical-grade aesthetics, and user-centered approach during the hackathon."
-tags: ["branding", "ui-ux-design", "trust-design", "medical-app", "vaidya-ai", "hackathon"]
+tags: ["branding", "ui-ux-design", "trust-design", "hackathon"]
 layout: post.njk
 image: "/assets/images/blog/vaidya-ai-branding.svg"
 ---
