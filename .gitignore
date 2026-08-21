@@ -12,6 +12,10 @@ yarn-error.log*
 .yarn/
 .claude/
 
+# BMad workflow tooling and generated planning artifacts
+_bmad/
+_bmad-output/
+
 # Environment variables
 .env
 .env.local
