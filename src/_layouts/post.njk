@@ -1,50 +1,64 @@
 ---
 layout: base.njk
+active: Blog
+noFooter: true
 ---
+{% set nav = collections.posts | postNav(page.url) %}
+{% set more = collections.posts | otherPosts(page.url, 3) %}
 
-<!-- Main -->
-<main>
-    <!-- Sidebar -->
-    {% include "sidebar.njk" %}
+<main id="main-content" class="column reader">
+  <article class="article">
+    <header class="article-header">
+      {% if tags and tags.length %}<span class="article-category">{{ tags[0] | titleCase }}</span>{% endif %}
+      <h1 class="article-title">{{ title }}</h1>
+      {% if excerpt %}<p class="article-deck">{{ excerpt | mdInline | safe }}</p>{% endif %}
+      <div class="article-byline">
+        <span class="article-byline-name">Sripathi Mohanasundaram</span>
+        <span aria-hidden="true">·</span>
+        <span>{{ date | dateDisplay }} · {{ content | readingTime }}</span>
+      </div>
+    </header>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Navbar hidden on blog posts for distraction-free reading -->
-
-        <!-- Blog Post Article -->
-        <article class="blog-post active" data-page="blog">
-            <header>
-                <h2 class="h2 article-title">{{ title }}</h2>
-                <!-- Date and reading time removed -->
-                {% if tags %}
-                <div class="blog-tags" style="margin-top: 16px;">
-                    {% for tag in tags %}
-                    <span class="tag">{{ tag }}</span>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </header>
-
-            <div class="blog-content">
-                {{ content | safe }}
-            </div>
-
-            <!-- Related Posts Section -->
-            <section class="related-posts">
-                <h3 class="related-posts-title">Related Articles</h3>
-                <div class="related-posts-grid" data-current-tags="{{ tags | join(',') }}" data-current-slug="{{ page.fileSlug }}">
-                    <!-- Related posts will be populated by JavaScript -->
-                </div>
-            </section>
-
-            <footer class="blog-footer">
-                <nav class="blog-nav">
-                    <a href="/blog/" class="braun-button">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
-                        <span>Back to Blog</span>
-                    </a>
-                </nav>
-            </footer>
-        </article>
+    <div class="ds-prose">
+      {{ content | safe }}
     </div>
+  </article>
+
+  <div class="reader-foot">
+    {% if tags and tags.length %}
+    <div class="topics">
+      {% for tag in tags %}
+      <a class="topic" href="/blog/">{{ tag | titleCase }}</a>
+      {% endfor %}
+    </div>
+    <hr class="rule">
+    {% endif %}
+
+    <div class="author-note">
+      <span class="author-avatar">SM</span>
+      <div>
+        <p class="author-name">Written by Sripathi Mohanasundaram</p>
+        <p class="author-bio">Senior Data Engineer at Fractal Analytics. Writing about data platforms, Generative AI, and the craft of reliable data engineering.</p>
+      </div>
+    </div>
+    <hr class="rule">
+
+    {% if more.length %}
+    <p class="eyebrow more-from-label">More from Sripathi Mohanasundaram</p>
+    <div>
+      {% for post in more %}
+      <a class="row-link" href="{{ post.url }}">
+        <h3>{{ post.data.title }}</h3>
+        {% if post.data.excerpt %}<p>{{ post.data.excerpt | mdInline | safe }}</p>{% endif %}
+        <div class="row-meta">{{ post.data.date | dateDisplay }} · {{ post.templateContent | readingTime }}</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="reader-nav">
+      {% if nav.prev %}<a href="{{ nav.prev.url }}">← {{ nav.prev.data.title }}</a>{% else %}<span></span>{% endif %}
+      {% if nav.next %}<a href="{{ nav.next.url }}">{{ nav.next.data.title }} →</a>{% endif %}
+    </div>
+  </div>
 </main>

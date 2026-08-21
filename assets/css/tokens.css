@@ -1,0 +1,393 @@
+/* ============================================================
+   DESIGN TOKENS
+   Ported verbatim from the sripathi-m-design-system skill:
+   tokens/{fonts,colors,typography,spacing,grid}.css.
+   Single source of truth for color, type, spacing and grid — every
+   component class in style.css consumes these custom properties.
+   Light is canonical; [data-theme="dark"] mirrors every token.
+   ============================================================ */
+
+/* ---- FONTS ----
+   Newsreader (editorial serif, every title) + Pretendard (the
+   grotesk that carries UI, body and all labels) + IBM Plex Mono,
+   reserved for code and keycaps only.
+   Pretendard is self-hosted from assets/fonts/ — no CDN dependency.
+   It is a variable font (weight 45–920), so one file covers every
+   weight the system uses. Newsreader and IBM Plex Mono come from
+   Google Fonts (linked from base.njk with preconnect + display=swap). */
+
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/PretendardVariable.woff2") format("woff2-variations");
+}
+
+/* ============================================================
+   COLORS
+   Cool near-white surfaces, a grey ramp with a faint cool cast, and
+   a QUIET accent: --accent is grey (#86868b) and does the calm work
+   — meta marks, rules, secondary UI. State is carried by --signal
+   (near-black ink #1d1d1f): active nav, primary keys, live markers.
+   Colour proper comes from the seven pastels, unchanged.
+   Light is canonical; [data-theme="dark"] mirrors every token.
+   ============================================================ */
+
+:root {
+  /* ---- Brand ---- */
+  --accent: #86868b;           /* the quiet accent — grey, never shouts */
+  --accent-deep: #6e6e73;      /* hover / pressed on the grey accent */
+  --accent-shadow: #00000021;  /* neutral edge on raised keys */
+
+  /* ---- Signal ----
+     A neutral accent cannot say "active". Near-black ink does: use
+     --signal for primary buttons, active nav, live dots, timeline
+     nodes. Nothing else in the system is this dark. */
+  --signal: #1d1d1f;
+  --signal-hover: #000000;
+
+  /* ---- Data / chart accents (muted, same L·C, hue rotated) ---- */
+  --data-1: var(--signal);
+  --data-2: oklch(52% 0.06 250);  /* slate */
+  --data-3: oklch(52% 0.06 165);  /* moss */
+  --data-4: oklch(52% 0.06 330);  /* plum */
+
+  /* ---- Raw neutrals (faint cool cast) ---- */
+  --grey-100: #fbfbfd;
+  --grey-200: #f5f5f7;
+  --grey-300: #ededf0;
+  --grey-400: #e3e3e6;
+  --grey-500: #d2d2d7;
+  --ink-900: #1d1d1f;
+  --ink-700: #6e6e73;
+  --ink-500: #86868b;
+
+  /* ---- Semantic surfaces ---- */
+  --background: #ffffff;   /* page / app shell */
+  --surface: #ffffff;      /* card surface */
+  --screen: #f5f5f7;       /* quiet panel, chips, inputs */
+  --foreground: #1d1d1f;
+
+  /* ---- Semantic text ---- */
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --text-muted: rgba(29, 29, 31, 0.66);
+  --text-on-primary: #ffffff;
+
+  /* ---- Lines & accents ---- */
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --primary: var(--signal);
+  --primary-hover: var(--signal-hover);
+  --primary-alpha-10: rgba(29, 29, 31, 0.07);
+  --primary-alpha-20: rgba(29, 29, 31, 0.16);
+
+  /* ---- Semantic status ---- */
+  --success:        #1a7a52;   /* forest ink */
+  --success-bg:     #eef6f1;
+  --success-border: #cbe3d5;
+  --warning:        #a8781f;   /* ochre ink */
+  --warning-bg:     #f8f2e6;
+  --warning-border: #e8d7b2;
+  --error:          #c2352f;   /* brick ink */
+  --error-bg:       #faeded;
+  --error-border:   #ebc6c6;
+  --info:           #35618f;   /* slate blue ink */
+  --info-bg:        #eef3f8;
+  --info-border:    #cfdeeb;
+
+  /* ---- Pastels ----
+     A seven-step pastel set for large quiet surfaces: card fills,
+     thumbnails, category fields. Light enough to carry ink text.
+     `-ink` is the same hue one step deeper, for small marks (dots,
+     rules, segment bars) that would disappear at pastel strength.
+     `-wash` is the hue diluted for page-level fills.
+     Never for text — contrast is too low. */
+  --pastel-violet: #cbceea;
+  --pastel-sky:    #cdebf1;
+  --pastel-leaf:   #def1d0;
+  --pastel-peach:  #f8e2d3;
+  --pastel-rose:   #f8e5e5;
+  --pastel-mint:   #cfe9e1;
+  --pastel-sand:   #f5ebcb;
+
+  --pastel-violet-ink: #afb3dc;
+  --pastel-sky-ink:    #addce6;
+  --pastel-leaf-ink:   #c4e3af;
+  --pastel-peach-ink:  #f0cab2;
+  --pastel-rose-ink:   #efc9c9;
+  --pastel-mint-ink:   #b0d8cc;
+  --pastel-sand-ink:   #ebdca6;
+
+  --wash-violet: #f2f3fa;
+  --wash-sky:    #eff8fb;
+  --wash-leaf:   #f4faef;
+  --wash-peach:  #fdf4ef;
+  --wash-rose:   #fcf3f3;
+  --wash-mint:   #eff8f5;
+  --wash-sand:   #fbf7e9;
+
+  /* ---- Gradients (structural only — never decorative) ---- */
+  --bg-gradient-onyx: linear-gradient(to bottom right, #ffffff 3%, #f5f5f7 97%);
+  --text-gradient-accent: linear-gradient(to right, #1d1d1f, #6e6e73);
+}
+
+[data-theme="dark"] {
+  /* The grey accent lifts; the signal inverts to near-white */
+  --accent: #98989d;
+  --accent-deep: #b4b4b9;
+  --accent-shadow: #ffffff1f;
+  --signal: #f5f5f7;
+  --signal-hover: #ffffff;
+  --primary-alpha-10: rgba(245, 245, 247, 0.10);
+  --primary-alpha-20: rgba(245, 245, 247, 0.22);
+  --text-on-primary: #1d1d1f;
+
+  /* raw neutrals invert — surfaces built on them stay dark */
+  --grey-100: #1c1c1e;
+  --grey-200: #2c2c2e;
+  --grey-300: #3a3a3c;
+  --grey-400: #48484a;
+  --grey-500: #5c5c5e;
+
+  --background: #000000;
+  --surface: #1c1c1e;
+  --screen: #2c2c2e;
+  --foreground: #f5f5f7;
+
+  --text-primary: #f5f5f7;
+  --text-secondary: #98989d;
+  --text-tertiary: #6e6e73;
+  --text-muted: rgba(245, 245, 247, 0.66);
+
+  --border: rgba(255, 255, 255, 0.11);
+  --border-strong: rgba(255, 255, 255, 0.22);
+
+  /* Status — brighter inks, translucent fills */
+  --success:        #5cc492;
+  --success-bg:     rgba(92, 196, 146, 0.12);
+  --success-border: rgba(92, 196, 146, 0.30);
+  --warning:        #d9a83c;
+  --warning-bg:     rgba(217, 168, 60, 0.12);
+  --warning-border: rgba(217, 168, 60, 0.30);
+  --error:          #e07070;
+  --error-bg:       rgba(224, 112, 112, 0.12);
+  --error-border:   rgba(224, 112, 112, 0.30);
+  --info:           #7aa9d8;
+  --info-bg:        rgba(122, 169, 216, 0.12);
+  --info-border:    rgba(122, 169, 216, 0.30);
+
+  --bg-gradient-onyx: linear-gradient(to bottom right, #2c2c2e 3%, #000000 97%);
+  --text-gradient-accent: linear-gradient(to right, #f5f5f7, #98989d);
+
+  /* Pastels dim, washes become translucent tints of the same hue */
+  --pastel-violet: #6f74a8;
+  --pastel-sky:    #6ba4b3;
+  --pastel-leaf:   #85ab72;
+  --pastel-peach:  #b98d72;
+  --pastel-rose:   #b58888;
+  --pastel-mint:   #6fa294;
+  --pastel-sand:   #b3a069;
+
+  --pastel-violet-ink: #8a8fc4;
+  --pastel-sky-ink:    #86bdcc;
+  --pastel-leaf-ink:   #9dc389;
+  --pastel-peach-ink:  #d2a385;
+  --pastel-rose-ink:   #cd9d9d;
+  --pastel-mint-ink:   #87b8aa;
+  --pastel-sand-ink:   #ccb87c;
+
+  --wash-violet: rgba(175, 179, 220, 0.09);
+  --wash-sky:    rgba(173, 220, 230, 0.09);
+  --wash-leaf:   rgba(196, 227, 175, 0.09);
+  --wash-peach:  rgba(240, 202, 178, 0.09);
+  --wash-rose:   rgba(239, 201, 201, 0.09);
+  --wash-mint:   rgba(176, 216, 204, 0.09);
+  --wash-sand:   rgba(235, 220, 166, 0.09);
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   Two voices and a utility. Newsreader — a high-contrast editorial
+   serif — sets every title. Pretendard, a neutral grotesk, carries
+   running text AND the label voice (eyebrows, nav, buttons, tags,
+   metadata) in tracked-out uppercase. IBM Plex Mono is for code,
+   keycaps and raw values only.
+   Rhythm is tight — titles lead at 1.14, prose at 1.55.
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --ff-display: "Newsreader", "Times New Roman", Georgia, serif;
+  --ff-primary: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ff-label: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --ff-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* base aliases */
+  --font-display: var(--ff-display);
+  --font-body: var(--ff-primary);
+  --font-label: var(--ff-label);
+
+  /* ---- Size scale (product UI) ---- */
+  --fs-1: 20px;
+  --fs-2: 16px;
+  --fs-3: 15px;
+  --fs-4: 14px;
+  --fs-5: 13px;
+  --fs-6: 12px;
+  --fs-7: 11px;
+  --fs-8: 10px;
+
+  /* semantic sizes — product UI */
+  --text-display: 20px;
+  --text-title: 16px;
+  --text-body: 15px;
+  --text-small: 13px;
+  --text-label: 11px;
+
+  /* ---- Editorial / display scale (blog, hero, marketing) ---- */
+  --fs-display-1: clamp(36px, 5.2vw, 52px); /* article H1 / hero */
+  --fs-display-2: 32px;                   /* featured card title */
+  --fs-display-3: 26px;                   /* article H2 */
+  --fs-display-4: 20px;                   /* article H3 / lead */
+  --fs-reading: 20px;                     /* long-form body */
+
+  /* ---- Reading measure & rhythm ---- */
+  --measure: 100%;        /* prose fills the reading column */
+  --reading-column: 692px;/* the one long-form column width */
+  --lh-reading: 1.6;
+
+  /* ---- Weights ---- */
+  --fw-300: 300;
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-600: 600;
+
+  /* ---- Line heights ---- */
+  --lh-tight: 1.14; /* serif titles */
+  --lh-snug: 1.4;
+  --lh-body: 1.55;
+
+  /* ---- Tracking ---- */
+  --tracking-label: 0.09em;
+  --tracking-loose: 0.14em;
+  --tracking-tight: -0.02em;
+  --tracking-display: -0.035em;
+}
+
+/* ============================================================
+   SPACING · RADII · SHADOWS · MOTION
+   Elevation is almost entirely hairline: cards are a 1px border on
+   a near-white surface. Only the raised key survives, softened to
+   two quiet layers, and only interactive controls may wear it.
+   ============================================================ */
+
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* ---- Radii ---- */
+  --radius-xs: 3px;   /* tags / chips */
+  --radius-sm: 6px;   /* list rows, inputs */
+  --radius-md: 8px;   /* buttons */
+  --radius-lg: 12px;  /* cards */
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+
+  /* ---- Shadows ---- */
+  --shadow-button: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-pressed: inset 0 1px 2px rgba(0, 0, 0, 0.10);
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-key: 0 1px 1px rgba(0, 0, 0, 0.04),
+    0 3px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  --shadow-key-pressed: inset 0 1px 3px rgba(0, 0, 0, 0.14);
+  --shadow-panel: inset 0 1px 3px rgba(0, 0, 0, 0.06),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.7);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05),
+    0 8px 24px rgba(0, 0, 0, 0.04);
+
+  /* ---- Motion ---- */
+  --transition-1: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-2: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-key: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --shadow-button: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-pressed: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-key: 0 1px 1px rgba(0, 0, 0, 0.4),
+    0 3px 8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --shadow-key-pressed: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-panel: inset 0 1px 3px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   GRID SYSTEM
+   12-column, 4px-base gutters. Page margins scale with viewport.
+   ============================================================ */
+
+:root {
+  --grid-cols: 12;
+
+  --grid-gutter-xs: 12px;
+  --grid-gutter-sm: 16px;
+  --grid-gutter-md: 24px;
+  --grid-gutter-lg: 32px;
+  --grid-gutter:    var(--grid-gutter-md);
+
+  --grid-margin-xs: 16px;
+  --grid-margin-sm: 24px;
+  --grid-margin-md: 32px;
+  --grid-margin-lg: 48px;
+  --grid-margin:    var(--grid-margin-md);
+
+  --container-sm:  540px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl: 1440px;
+  --container-max: var(--container-xl);
+}
+
+@media (max-width: 479px) {
+  :root {
+    --grid-gutter: var(--grid-gutter-xs);
+    --grid-margin: var(--grid-margin-xs);
+  }
+}
+@media (min-width: 480px) and (max-width: 767px) {
+  :root {
+    --grid-gutter: var(--grid-gutter-sm);
+    --grid-margin: var(--grid-margin-sm);
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --grid-gutter: var(--grid-gutter-md);
+    --grid-margin: var(--grid-margin-md);
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --grid-gutter: var(--grid-gutter-lg);
+    --grid-margin: var(--grid-margin-lg);
+  }
+}

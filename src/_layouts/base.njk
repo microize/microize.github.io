@@ -5,25 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if title %}{{ title }} - {% endif %}Sripathi Mohanasundaram - Personal Portfolio</title>
-    
-    <!-- Favicon -->
+
+    <!-- Favicon: pastel-violet "S" monogram, matching the design system's palette -->
     <link rel="shortcut icon" href="/assets/images/fav_log.ico" type="image/x-icon">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css?v=10">
-    
-    <!-- Google Fonts -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon_io/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/images/favicon_io/site.webmanifest">
+
+    <!-- Design tokens (colors, typography, spacing, grid, self-hosted Pretendard) -->
+    <link rel="stylesheet" href="/assets/css/tokens.css?v=1">
+
+    <!-- Component & page CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css?v=11">
+
+    <!-- Google Fonts: Newsreader (display serif) + IBM Plex Mono (code/keycaps). Pretendard is self-hosted via tokens.css. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Preload Critical Assets -->
+    <link rel="preload" as="image" href="/assets/images/my-avatar.png">
+
     {% if description %}
     <meta name="description" content="{{ description }}">
     {% endif %}
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="{% if title %}{{ title }}{% else %}Sripathi Mohanasundaram - Senior Data Engineer{% endif %}">
-    
+
     <script>
       // Prevent Flash of Unstyled Content
       try {
@@ -37,7 +47,7 @@
     {% endif %}
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ page.url }}">
-    
+
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -92,25 +102,25 @@
         {% if title and page.url.includes('/blog/') %}
         ,{
           "@type": "Article",
-          "@id": "{{ page.url }}#article",
-          "headline": "{{ title }}",
-          "description": "{{ description or excerpt }}",
+          "@id": {{ (page.url ~ "#article") | dump | safe }},
+          "headline": {{ title | dump | safe }},
+          "description": {{ (description or (excerpt | stripMd)) | dump | safe }},
           "author": {
             "@id": "https://microize.github.io/#person"
           },
           "publisher": {
             "@id": "https://microize.github.io/#person"
           },
-          {% if date %}"datePublished": "{{ date | dateISO }}",
-          "dateModified": "{{ date | dateISO }}",{% endif %}
+          {% if date %}"datePublished": {{ (date | dateISO) | dump | safe }},
+          "dateModified": {{ (date | dateISO) | dump | safe }},{% endif %}
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "{{ page.url }}"
+            "@id": {{ page.url | dump | safe }}
           },
-          "url": "{{ page.url }}",
+          "url": {{ page.url | dump | safe }},
           {% if tags %}
           "keywords": [
-            {% for tag in tags %}"{{ tag }}"{% if not loop.last %},{% endif %}{% endfor %}
+            {% for tag in tags %}{{ tag | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
           ],
           {% endif %}
           "articleSection": "Technology",
@@ -123,25 +133,22 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    {% include "masthead.njk" %}
+
     {{ content | safe }}
-    
-    <!-- Theme Toggle -->
-    <div class="theme-toggle-container" id="theme-toggle-wrapper">
-        <div class="theme-toggle" id="theme-toggle" role="button" tabindex="0" aria-label="Toggle dark mode">
-            <div class="theme-toggle-inner">
-                <div class="theme-toggle-circle"></div>
-                <ion-icon name="moon" class="theme-toggle-icon icon-moon-left"></ion-icon>
-                <ion-icon name="sunny" class="theme-toggle-icon icon-sun-right"></ion-icon>
-            </div>
-        </div>
-    </div>
+
+    {% if not noFooter %}
+    {% include "footer.njk" %}
+    {% endif %}
 
     <!-- custom js link -->
-    <script src="/assets/js/theme.js?v=2"></script>
-    <script src="/assets/js/script.js?v=2"></script>
-    
-    <!-- ionicon link -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="/assets/js/theme.js?v=3"></script>
+    <script src="/assets/js/script.js?v=3"></script>
+
+    <!-- Lucide icons (design system's icon set) -->
+    <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

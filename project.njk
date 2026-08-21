@@ -1,0 +1,53 @@
+---
+layout: base.njk
+title: "Synapse → OneLake"
+description: "Case study: migrating an enterprise Azure Synapse warehouse to Microsoft Fabric OneLake with no downtime for downstream consumers."
+active: Portfolio
+permalink: /project/
+---
+
+<main id="main-content" class="page">
+  <section class="project-hero">
+    <span class="status-dot"><span class="status-dot-mark"></span>Case study — Fractal Analytics</span>
+    <h1 class="project-hero-title">Synapse → Microsoft Fabric OneLake migration</h1>
+    <p class="project-hero-lede">Migrated data from Azure Synapse to Microsoft Fabric OneLake for a global retail client, ensuring integrity and optimizing storage architecture — while monitoring and optimizing pipelines to achieve 99.9% uptime through the cutover.</p>
+    <dl class="def-list project-facts">
+      <dt>Role</dt><dd>Data Engineer — pipeline design, migration</dd>
+      <dt>Period</dt><dd>Jan 2023 — Present</dd>
+      <dt>Stack</dt><dd>Azure Synapse · Microsoft Fabric OneLake · Databricks · Azure Data Factory · SQL</dd>
+      <dt>Outcome</dt><dd>99.9% uptime through cutover</dd>
+    </dl>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>The problem</h2>
+      <p>The retail client's warehouse ran on Azure Synapse with metadata pipelines that needed to scale further, and 50+ transactional tables were still coupling downstream reporting directly to the operational system — adding load and slowing everything behind it.</p>
+      <h2>Approach</h2>
+      <p>I contributed to the ODS project, replicating those 50+ transactional tables to take load off the source system and enable faster scaling. From there the warehouse itself moved onto Microsoft Fabric OneLake, with the migration built to preserve data integrity and optimize the storage architecture rather than lift-and-shift the existing structure as-is.</p>
+    </div>
+    <div class="thumb pastel-sky thumb-21-9" style="margin-top:48px">Architecture diagram</div>
+    <p class="meta-mono" style="margin-top:12px">Azure Synapse → Microsoft Fabric OneLake, with Databricks and Azure Data Factory driving ingestion throughout.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><p class="eyebrow">Results</p></div>
+    <dl class="def-list" style="margin-top:32px">
+      <dt>Uptime</dt><dd>99.9% maintained across pipeline operations, supporting rapid scaling for high-volume data.</dd>
+      <dt>Scalability</dt><dd>Replicating 50+ transactional tables reduced system load and enabled faster scaling for downstream consumers.</dd>
+      <dt>Integrity</dt><dd>Migration preserved data integrity while optimizing the underlying storage architecture.</dd>
+      <dt>Stakeholders</dt><dd>Worked directly with stakeholders to design scalable solutions delivering measurable outcomes aligned with growth goals.</dd>
+    </dl>
+  </section>
+
+  <section class="section">
+    <hr class="divider">
+    <a class="index-row index-row-compact pastel-sand" href="/work/">
+      <div class="index-row-body">
+        <h3 class="index-row-title">All work</h3>
+        <p class="index-row-desc">Back to the index of collections and case studies.</p>
+      </div>
+      <div class="index-row-aside">→</div>
+    </a>
+  </section>
+</main>
