@@ -1,0 +1,30 @@
+{#
+  BottomNav — app-style tab bar, mobile/tablet only (hidden ≥768px, where
+  the masthead's inline nav takes over). Icon-only: the labels stay in the
+  markup but are visually hidden, so screen readers and the a11y tree still
+  get a real name for every tab. Current tab is marked by a pastel-violet
+  pill behind its icon.
+  Home has no `active` front-matter value, so it keys off page.url instead.
+#}
+<nav class="bottom-nav" aria-label="Primary mobile">
+  <a href="/"{% if page.url == "/" %} aria-current="page"{% endif %}>
+    <i data-lucide="house" width="22" height="22" stroke-width="1.75"></i>
+    <span class="visually-hidden">Home</span>
+  </a>
+  <a href="/resume/"{% if active == "Resume" %} aria-current="page"{% endif %}>
+    <i data-lucide="file-text" width="22" height="22" stroke-width="1.75"></i>
+    <span class="visually-hidden">Resume</span>
+  </a>
+  <a href="/work/"{% if active == "Portfolio" %} aria-current="page"{% endif %}>
+    <i data-lucide="layout-grid" width="22" height="22" stroke-width="1.75"></i>
+    <span class="visually-hidden">Portfolio</span>
+  </a>
+  <a href="/blog/"{% if active == "Blog" %} aria-current="page"{% endif %}>
+    <i data-lucide="book-open" width="22" height="22" stroke-width="1.75"></i>
+    <span class="visually-hidden">Blog</span>
+  </a>
+  <a href="/contact/"{% if active == "Contact" %} aria-current="page"{% endif %}>
+    <i data-lucide="mail" width="22" height="22" stroke-width="1.75"></i>
+    <span class="visually-hidden">Contact</span>
+  </a>
+</nav>

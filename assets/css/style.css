@@ -38,6 +38,21 @@ img { max-width: 100%; }
   color: var(--text-tertiary);
 }
 
+/* Text that carries the accessible name for an icon-only control: off-screen
+   for sighted users, still read aloud and still translatable. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Skip link — visually hidden until keyboard focus, standard a11y pattern. */
 .skip-link {
   position: absolute;
@@ -93,6 +108,7 @@ img { max-width: 100%; }
   justify-content: space-between;
   gap: 24px;
 }
+@media (max-width: 640px) { .masthead-in { padding: 0 20px; } }
 .wordmark {
   font-family: var(--ff-display);
   font-size: 16px;
@@ -102,6 +118,7 @@ img { max-width: 100%; }
   text-decoration: none;
   color: var(--text-primary);
 }
+.wordmark-short { display: none; }
 .mast-right { display: flex; align-items: center; gap: 28px; }
 .mast-nav { display: flex; align-items: center; gap: 28px; }
 .mast-nav a {
@@ -123,6 +140,67 @@ img { max-width: 100%; }
   bottom: 0;
   height: 2px;
   background: var(--signal);
+}
+
+/* ============================================================
+   BOTTOM NAV (mobile/tablet)
+   App-style tab bar that replaces the masthead's inline nav below
+   768px. Icon-only and translucent; the current tab is marked by
+   filling its whole cell with pastel-violet rather than a rule, so
+   the bar reads as chrome rather than as a row of links.
+   ============================================================ */
+
+.bottom-nav {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  background: var(--background);
+  border-top: 1px solid var(--border);
+}
+/* Go translucent only where the blur that keeps the icons legible over
+   scrolling content is supported — otherwise stay on the opaque fill above. */
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .bottom-nav {
+    background: color-mix(in srgb, var(--background) 72%, transparent);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+  }
+}
+.bottom-nav a {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* The safe-area inset rides on the tabs, not the bar, so the current
+     tab's fill runs all the way down past the iOS home indicator
+     instead of stopping short of it. */
+  min-height: calc(54px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  text-decoration: none;
+  color: var(--text-secondary);
+  background: transparent;
+  transition: background var(--transition-1), color var(--transition-1);
+  -webkit-tap-highlight-color: transparent;
+}
+.bottom-nav a[aria-current="page"] {
+  background: var(--pastel-violet);
+  color: var(--text-primary);
+}
+.bottom-nav svg { display: block; }
+
+@media (max-width: 767px) {
+  .mast-nav { display: none; }
+  .bottom-nav { display: flex; }
+  /* Keep the footer and page tail clear of the fixed bar (1px border + 54px tab). */
+  body { padding-bottom: calc(55px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (max-width: 480px) {
+  .wordmark-full { display: none; }
+  .wordmark-short { display: inline; }
 }
 
 /* ============================================================
@@ -241,11 +319,9 @@ img { max-width: 100%; }
 .prose { max-width: 66ch; }
 .prose p { margin: 0 0 18px; font-size: 17px; line-height: 1.62; color: var(--text-secondary); }
 .prose h2 { margin: 48px 0 14px; font-family: var(--ff-display); font-size: 26px; font-weight: 600; letter-spacing: -.02em; color: var(--text-primary); }
-/* Home "About" band: full band width instead of the 66ch reading column.
-   DS index.html sets these paragraphs inline at 18px / #6E6E73 (== --text-secondary),
-   overriding the base .prose p's 17px/text-secondary — same ink, bigger size. */
+/* Home "About" band: full band width instead of the 66ch reading column. */
 .prose.about-prose { max-width: none; margin-bottom: 34px; }
-.prose.about-prose p { font-size: 18px; color: var(--text-secondary); }
+.prose.about-prose p { font-size: 18px; color: var(--text-primary); font-weight: 400; }
 
 .ink-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
 .tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
@@ -287,6 +363,7 @@ img { max-width: 100%; }
   align-items: end;
   padding: 84px 0 44px;
 }
+.hero .eyebrow { font-size: 16px; letter-spacing: 0; text-transform: none; }
 .hero-title {
   margin: 26px 0 0;
   max-width: 15ch;
@@ -388,9 +465,10 @@ img { max-width: 100%; }
   transition: background var(--transition-2);
 }
 .project-card:hover { background: var(--pastel); }
-.project-card-title { margin-top: 14px; font-family: var(--ff-display); font-size: 22px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
-.project-card-desc { margin-top: 10px; font-size: 15px; line-height: 1.6; color: var(--text-secondary); }
-.project-card-meta { margin-top: auto; padding-top: 18px; font-family: var(--ff-label); font-size: 12px; color: var(--text-secondary); }
+.project-card:hover .project-card-meta { color: var(--text-primary); }
+.project-card-title { margin-top: 14px; font-family: var(--ff-display); font-size: 22px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; color: var(--text-primary); }
+.project-card-desc { margin-top: 10px; font-size: 15px; line-height: 1.6; color: var(--text-primary); }
+.project-card-meta { margin-top: auto; padding-top: 18px; font-family: var(--ff-label); font-size: 12px; color: var(--text-secondary); transition: color var(--transition-2); }
 .project-card-arrow {
   position: absolute;
   right: 20px;
@@ -415,9 +493,10 @@ img { max-width: 100%; }
   transition: background var(--transition-2);
 }
 .featured-project-card:hover { background: color-mix(in srgb, var(--pastel-violet) 62%, var(--pastel-violet-ink)); }
-.featured-project-eyebrow { font-family: var(--ff-label); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); }
-.featured-project-title { flex: 1; font-family: var(--ff-display); font-size: 28px; font-weight: 600; letter-spacing: -.024em; line-height: 1.2; }
-.featured-project-meta { font-family: var(--ff-label); font-size: 12px; color: var(--text-secondary); }
+.featured-project-card:hover .featured-project-eyebrow, .featured-project-card:hover .featured-project-meta { color: var(--text-primary); }
+.featured-project-eyebrow { font-family: var(--ff-label); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); transition: color var(--transition-2); }
+.featured-project-title { flex: 1; font-family: var(--ff-display); font-size: 28px; font-weight: 600; letter-spacing: -.024em; line-height: 1.2; color: var(--text-primary); }
+.featured-project-meta { font-family: var(--ff-label); font-size: 12px; color: var(--text-secondary); transition: color var(--transition-2); }
 .featured-project-arrow { margin-left: auto; font-size: 15px; opacity: .5; transition: opacity var(--transition-1); }
 .featured-project-card:hover .featured-project-arrow { opacity: 1; }
 
@@ -461,12 +540,13 @@ img { max-width: 100%; }
 }
 .index-row-compact { grid-template-columns: 1fr 132px; padding: 22px 12px 22px 0; }
 .index-row:hover { background: color-mix(in srgb, var(--pastel) 42%, var(--background)); }
-.index-row-title { margin: 0; font-family: var(--ff-display); font-size: 26px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; }
+.index-row:hover .index-row-desc, .index-row:hover .index-row-aside { color: var(--text-primary); }
+.index-row-title { margin: 0; font-family: var(--ff-display); font-size: 26px; font-weight: 600; letter-spacing: -.02em; line-height: 1.3; color: var(--text-primary); }
 .index-row-compact .index-row-title { font-size: 20px; }
 .index-row:hover .index-row-title { text-decoration: underline; text-underline-offset: 4px; }
-.index-row-desc { margin: 8px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-secondary); max-width: 56ch; }
+.index-row-desc { margin: 8px 0 0; font-size: 15px; line-height: 1.6; color: var(--text-secondary); max-width: 56ch; transition: color var(--transition-2); }
 .index-row-body { min-width: 0; }
-.index-row-aside { font-family: var(--ff-label); font-size: 12px; color: var(--text-tertiary); text-align: right; padding-top: 9px; line-height: 1.6; }
+.index-row-aside { font-family: var(--ff-label); font-size: 12px; color: var(--text-tertiary); text-align: right; padding-top: 9px; line-height: 1.6; transition: color var(--transition-2); }
 
 @media (max-width: 640px) {
   .index-row, .index-row-compact { grid-template-columns: 1fr; }
@@ -479,7 +559,7 @@ img { max-width: 100%; }
    ============================================================ */
 
 .blog-card { display: block; padding: 18px 0 26px; text-decoration: none; color: inherit; }
-.blog-card-title { margin: 0; font-family: var(--ff-display); font-size: 20px; font-weight: 600; letter-spacing: -.015em; line-height: 1.35; }
+.blog-card-title { margin: 0; font-family: var(--ff-display); font-size: 20px; font-weight: 600; letter-spacing: -.015em; line-height: 1.35; color: var(--text-primary); }
 .blog-card:hover .blog-card-title { text-decoration: underline; text-underline-offset: 3px; }
 .blog-card-meta { margin-top: 12px; font-size: 13px; color: var(--text-tertiary); }
 
@@ -505,6 +585,10 @@ img { max-width: 100%; }
 .timeline-head { display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; align-items: baseline; }
 .timeline-title { margin: 0; font-family: var(--ff-display); font-size: 22px; font-weight: 600; letter-spacing: -.018em; line-height: 1.3; max-width: 30ch; }
 .timeline-span { font-family: var(--ff-label); font-size: 12px; font-weight: 700; color: var(--text-primary); white-space: nowrap; text-align: right; }
+@media (max-width: 480px) {
+  .timeline-head { grid-template-columns: 1fr; }
+  .timeline-span { text-align: left; }
+}
 .timeline-org { grid-column: 1 / -1; margin: 6px 0 0; font-family: var(--ff-label); font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
 .timeline-body { margin: 12px 0 0; font-size: 15px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; }
 .timeline-points { display: grid; gap: 7px; margin: 12px 0 0; padding: 0; list-style: none; }
@@ -630,11 +714,11 @@ img { max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--pastel-ink);
+  color: var(--text-primary);
   transition: background var(--transition-2), color var(--transition-1);
 }
 .contact-tile:hover .contact-tile-icon { background: var(--background); color: var(--text-primary); }
-.contact-tile-label { margin-top: 26px; font-size: 15px; font-weight: 500; }
+.contact-tile-label { margin-top: 26px; font-size: 15px; font-weight: 500; color: var(--text-primary); }
 .contact-tile-value { margin-top: 5px; font-family: var(--ff-label); font-size: 11px; color: var(--text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* ============================================================
@@ -756,9 +840,9 @@ img { max-width: 100%; }
   border-radius: 100px;
   padding: 6px 13px;
   text-decoration: none;
-  transition: background var(--transition-1);
+  transition: background var(--transition-1), color var(--transition-1);
 }
-.topic:hover { background: var(--pastel-sky); }
+.topic:hover { background: var(--pastel-sky); color: var(--text-primary); }
 .topic:nth-child(2) { background: color-mix(in srgb, var(--pastel-mint) 55%, var(--background)); }
 .topic:nth-child(2):hover { background: var(--pastel-mint); }
 .topic:nth-child(3) { background: color-mix(in srgb, var(--pastel-sand) 55%, var(--background)); }
@@ -874,6 +958,15 @@ img { max-width: 100%; }
   overflow: hidden;
 }
 .scroll-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+/* Lift clear of the fixed bottom nav, and shrink to a thumb-sized target. */
+@media (max-width: 767px) {
+  .scroll-to-top {
+    width: 46px;
+    height: 46px;
+    right: 18px;
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+}
 .scroll-to-top:hover { background: var(--screen); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
 .scroll-to-top svg { color: var(--text-secondary); transition: all 0.3s ease; }
 .scroll-to-top:hover svg { color: var(--primary); transform: translateY(-2px); }
