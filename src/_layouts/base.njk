@@ -31,6 +31,9 @@
     <meta name="description" content="{{ description }}">
     {% endif %}
 
+    <!-- Canonical URL on the live domain (CNAME: sripathim.com) -->
+    <link rel="canonical" href="https://sripathim.com{{ page.url }}">
+
     <!-- Open Graph -->
     <meta property="og:title" content="{% if title %}{{ title }}{% else %}Sripathi Mohanasundaram - Architect{% endif %}">
 
@@ -46,7 +49,11 @@
     <meta property="og:description" content="{{ description }}">
     {% endif %}
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ page.url }}">
+    <meta property="og:url" content="https://sripathim.com{{ page.url }}">
+    <meta property="og:site_name" content="Sripathi Mohanasundaram">
+    <meta property="og:image" content="https://sripathim.com/assets/images/my-avatar.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@SripathiMohana1">
 
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
@@ -55,16 +62,19 @@
       "@graph": [
         {
           "@type": "Person",
-          "@id": "https://microize.github.io/#person",
+          "@id": "https://sripathim.com/#person",
           "name": "Sripathi Mohanasundaram",
-          "jobTitle": "Architect",
-          "description": "Architect with 8+ years transforming data landscapes across retail, energy, and tech sectors",
-          "url": "https://microize.github.io/",
-          "image": "https://microize.github.io/assets/images/my-avatar.png",
+          "jobTitle": "Data & AI Architect",
+          "description": "Data & AI Architect at Fractal, architecting the enterprise ontology and semantic layer that AI agents query instead of raw tables. Ten years across supply chain and logistics, consumer goods, retail and energy.",
+          "url": "https://sripathim.com/",
+          "image": "https://sripathim.com/assets/images/my-avatar.png",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Fractal"
+          },
           "sameAs": [
             "https://www.linkedin.com/in/sripathi-mohanasundaram/",
             "https://github.com/microize",
-            "https://www.kaggle.com/microize",
             "https://twitter.com/SripathiMohana1"
           ],
           "address": {
@@ -73,51 +83,54 @@
             "addressRegion": "Tamil Nadu",
             "addressCountry": "India"
           },
-          "alumniOf": "Anna University",
+          "alumniOf": "Chettinad College of Engineering & Technology",
           "knowsAbout": [
-            "Data Engineering",
-            "Azure",
-            "Python",
-            "Machine Learning",
+            "Enterprise Data Architecture",
+            "Enterprise Ontology",
+            "Semantic Layer",
+            "Data Governance",
+            "Data Modeling",
             "Databricks",
-            "GenAI",
-            "Leadership"
+            "Azure",
+            "AI Agents",
+            "Generative AI",
+            "Supply Chain and Logistics"
           ]
         },
         {
           "@type": "WebSite",
-          "@id": "https://microize.github.io/#website",
-          "url": "https://microize.github.io/",
+          "@id": "https://sripathim.com/#website",
+          "url": "https://sripathim.com/",
           "name": "Sripathi Mohanasundaram - Personal Portfolio",
-          "description": "Portfolio and blog of Sripathi Mohanasundaram, Architect specializing in AI, Azure, and data platform leadership",
+          "description": "Portfolio and blog of Sripathi Mohanasundaram, Data & AI Architect specialising in enterprise ontology, semantic layers and AI on enterprise data",
           "publisher": {
-            "@id": "https://microize.github.io/#person"
+            "@id": "https://sripathim.com/#person"
           },
           "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://microize.github.io/blog/?search={search_term_string}",
+            "target": "https://sripathim.com/blog/?search={search_term_string}",
             "query-input": "required name=search_term_string"
           }
         }
         {% if title and page.url.includes('/blog/') %}
         ,{
           "@type": "Article",
-          "@id": {{ (page.url ~ "#article") | dump | safe }},
+          "@id": {{ ("https://sripathim.com" ~ page.url ~ "#article") | dump | safe }},
           "headline": {{ title | dump | safe }},
           "description": {{ (description or (excerpt | stripMd)) | dump | safe }},
           "author": {
-            "@id": "https://microize.github.io/#person"
+            "@id": "https://sripathim.com/#person"
           },
           "publisher": {
-            "@id": "https://microize.github.io/#person"
+            "@id": "https://sripathim.com/#person"
           },
           {% if date %}"datePublished": {{ (date | dateISO) | dump | safe }},
           "dateModified": {{ (date | dateISO) | dump | safe }},{% endif %}
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": {{ page.url | dump | safe }}
+            "@id": {{ ("https://sripathim.com" ~ page.url) | dump | safe }}
           },
-          "url": {{ page.url | dump | safe }},
+          "url": {{ ("https://sripathim.com" ~ page.url) | dump | safe }},
           {% if tags %}
           "keywords": [
             {% for tag in tags %}{{ tag | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
