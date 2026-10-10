@@ -9,9 +9,9 @@ image: "/assets/images/blog/hackathon-comfort-zone.svg"
 
 ![Breaking Boundaries and Comfort Zone](/assets/images/blog/placeholder.png)
 
-There's a unique thrill in stepping into the unknown — a mix of excitement, nervousness, and hope. I recently experienced this while participating in an internal UI/UX hackathon organized by my organization. The challenge? To redesign user interface for Vaidya.ai, multimodal health assistant. You can explore the application [here](https://vaidya.ai).
+There's a unique thrill in stepping into the unknown - a mix of excitement, nervousness, and hope. I recently experienced this while participating in an internal UI/UX hackathon organized by my organization. The challenge? To redesign user interface for Vaidya.ai, multimodal health assistant. You can explore the application [here](https://vaidya.ai).
 
-This blog narrates my journey through the hackathon — how I embraced new challenges and broke out of my comfort zone. For those curious about the specifics of our design and implementation process, you can check out [Blog 2: Branding: Redefining Trust and Reliability for Vaidya.ai](/blog/2024-12-15-branding-trust-reliability-vaidya-ai/).
+This blog narrates my journey through the hackathon - how I embraced new challenges and broke out of my comfort zone. For those curious about the specifics of our design and implementation process, you can check out [Blog 2: Branding: Redefining Trust and Reliability for Vaidya.ai](/blog/2024-12-15-branding-trust-reliability-vaidya-ai/).
 
 The hackathon was structured in two phases:
 
@@ -64,7 +64,7 @@ The project was not just about coding or design; it was about **persistence, tea
 
 ## The Outcome and the Takeaway
 
-In the end, our efforts were rewarded — **we secured first prize**. But more than the prize, the experience taught us invaluable lessons.
+In the end, our efforts were rewarded - **we secured first prize**. But more than the prize, the experience taught us invaluable lessons.
 
 It reinforced my belief that true growth happens when you step out of your comfort zone. It's in those moments of uncertainty that you discover your potential. Whether it's learning a new skill, solving an unfamiliar problem, or working with a diverse team, the experience can be transformative.
 

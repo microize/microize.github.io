@@ -11,9 +11,9 @@ image: "/assets/images/blog/azure-api-optimization.svg"
 
 Imagine this: your Generative AI application is ready to shine, helping users in real-time… and then it slows to a crawl right when it's needed most.
 
-The culprit? Unoptimised API call frequency. The solution? Smarter API management — and a few lessons I wish I'd known sooner.
+The culprit? Unoptimised API call frequency. The solution? Smarter API management - and a few lessons I wish I'd known sooner.
 
-Over the last two months, I worked on two high-impact AI projects. Each pushed the limits of Azure OpenAI and taught me how to build faster, scalable, and cost-efficient AI systems. Here's what I learned — and how you can avoid the same pitfalls.
+Over the last two months, I worked on two high-impact AI projects. Each pushed the limits of Azure OpenAI and taught me how to build faster, scalable, and cost-efficient AI systems. Here's what I learned - and how you can avoid the same pitfalls.
 
 <br>
 
@@ -21,12 +21,12 @@ Over the last two months, I worked on two high-impact AI projects. Each pushed t
 
 ### 1. In-Store Virtual Chatbot
 An AI-powered assistant designed to instantly answer customer questions and recommend products, even during peak store hours.
-It needed to handle dozens of users at once — without lag.
+It needed to handle dozens of users at once - without lag.
 
 ### 2. Agent Support Tool
 A real-time AI helper for customer support teams, delivering context-aware, AI-generated responses to speed up ticket resolution and improve customer satisfaction.
 
-Both solutions were powered by Azure OpenAI models and an agentic RAG (Retrieval-Augmented Generation) approach — combining generative AI with data retrieval from external sources to ensure accurate, context-driven responses.
+Both solutions were powered by Azure OpenAI models and an agentic RAG (Retrieval-Augmented Generation) approach - combining generative AI with data retrieval from external sources to ensure accurate, context-driven responses.
 
 <br>
 
@@ -57,11 +57,11 @@ This approach helped both projects scale smoothly while staying within budget.
 
 ## The Takeaway
 
-Generative AI can be powerful and scalable — but only if you plan for API efficiency and cost control upfront.
+Generative AI can be powerful and scalable - but only if you plan for API efficiency and cost control upfront.
 By carefully managing API calls and leveraging tools like Provisioned Throughput Units (PTUs), you can build AI solutions that are fast, reliable, and financially sustainable.
 
 Have you faced similar API or scaling challenges in your AI projects?
-Drop your strategies, solutions, or lessons learned in the comments — I'd love to hear how others are tackling these issues!
+Drop your strategies, solutions, or lessons learned in the comments - I'd love to hear how others are tackling these issues!
 
 <br>
 
@@ -75,4 +75,4 @@ Drop your strategies, solutions, or lessons learned in the comments — I'd love
 
 > "The difference between a successful AI application and one that fails under pressure often comes down to how well you manage your API calls and resource allocation."
 
-Building scalable AI isn't just about the models—it's about the infrastructure and optimization strategies that support them.
+Building scalable AI isn't just about the models-it's about the infrastructure and optimization strategies that support them.

@@ -1,7 +1,7 @@
 ---
 title: "Semantic Search, Lesson 1: Why Keyword Search Only Gets You Halfway"
 date: 2026-08-28
-excerpt: "Notes from DeepLearning.AI's Large Language Models with Semantic Search course — how BM25 keyword search actually works, why it breaks on paraphrased queries, and where embeddings, dense retrieval, and rerank fit into the bigger RAG picture."
+excerpt: "Notes from DeepLearning.AI's Large Language Models with Semantic Search course - how BM25 keyword search actually works, why it breaks on paraphrased queries, and where embeddings, dense retrieval, and rerank fit into the bigger RAG picture."
 tags: ["nlp", "semantic-search", "rag", "learning-notes"]
 layout: post.njk
 image: ""
@@ -15,17 +15,17 @@ This is the gap that semantic search closes, and it's the starting point of Deep
 
 ## Two kinds of search
 
-**Lexical search** matches keywords. It looks for exact text strings — or close morphological variants — inside your documents. If your query and the document share the right words, you get a hit. If they don't, you don't. The engine has no opinion about meaning.
+**Lexical search** matches keywords. It looks for exact text strings - or close morphological variants - inside your documents. If your query and the document share the right words, you get a hit. If they don't, you don't. The engine has no opinion about meaning.
 
 **Semantic search** aims at intent and context. It tries to retrieve documents that *mean* the same thing as your query, whether or not they use the same vocabulary. "Cheap flights to Rome" and "budget airfare Italy" are lexically unrelated and semantically nearly identical, and a semantic system should know that.
 
-The course builds up to semantic search deliberately, and it starts with keyword search — partly because you need the baseline to appreciate what dense retrieval adds, and partly because keyword search is genuinely good at some things and isn't going anywhere.
+The course builds up to semantic search deliberately, and it starts with keyword search - partly because you need the baseline to appreciate what dense retrieval adds, and partly because keyword search is genuinely good at some things and isn't going anywhere.
 
 ## The stack: Weaviate and Cohere
 
 Two tools carry the course.
 
-**Weaviate** is an open-source vector database. What makes it a convenient teaching tool is that it supports both modes in one place — classic keyword search *and* vector search — so you can run the same query both ways and compare results directly.
+**Weaviate** is an open-source vector database. What makes it a convenient teaching tool is that it supports both modes in one place - classic keyword search *and* vector search - so you can run the same query both ways and compare results directly.
 
 **Cohere** provides the language models: the embeddings that power dense retrieval later in the course, plus the rerank and generation endpoints that come after that.
 
@@ -57,7 +57,7 @@ response = (
 
 The course uses the v3 Python client. Weaviate's v4 client restructures this API considerably, so if you're following along today, check which version you've installed before copying syntax.
 
-The dataset is a Weaviate-hosted demo instance of Wikipedia articles — millions of them, across multiple languages — which is large enough that the difference between search strategies actually shows up.
+The dataset is a Weaviate-hosted demo instance of Wikipedia articles - millions of them, across multiple languages - which is large enough that the difference between search strategies actually shows up.
 
 ## What `with_bm25` is doing
 
@@ -80,7 +80,7 @@ Now a query is a lookup and an intersection rather than a scan. This is the data
 
 The inverted index tells you *which* documents match. It doesn't tell you which ones matter. That's ranking, and **BM25** is the standard algorithm for it.
 
-The intuition here — how many words the query and the document have in common — is the right starting point, and BM25 refines it with three corrections:
+The intuition here - how many words the query and the document have in common - is the right starting point, and BM25 refines it with three corrections:
 
 - **Rare words count more.** A document matching "Hamlet" is more interesting than one matching "the." Common terms get discounted; distinctive ones get weighted up.
 - **Repetition has diminishing returns.** A document mentioning "Hamlet" fifty times isn't fifty times more relevant than one mentioning it five times. BM25 saturates the term-frequency contribution rather than letting it grow linearly.
@@ -96,12 +96,12 @@ Ask "who was the Bard of Avon" and a BM25 system will not find the Shakespeare a
 
 This is precisely the failure mode the rest of the course addresses:
 
-- **Embeddings** — turn text into vectors where semantic similarity becomes geometric proximity
-- **Dense retrieval** — search that vector space instead of a word index
-- **ReRank** — a second pass that reorders candidate results by relevance to the query
-- **Generating answers** — feed retrieved passages to an LLM to produce a direct response rather than a list of links
+- **Embeddings** - turn text into vectors where semantic similarity becomes geometric proximity
+- **Dense retrieval** - search that vector space instead of a word index
+- **ReRank** - a second pass that reorders candidate results by relevance to the query
+- **Generating answers** - feed retrieved passages to an LLM to produce a direct response rather than a list of links
 
-That last sequence — retrieve, rerank, generate — is the shape of most production RAG systems today.
+That last sequence - retrieve, rerank, generate - is the shape of most production RAG systems today.
 
 ## The takeaway
 

@@ -26,7 +26,7 @@ Our goal was to position Vaidya.ai not as just another chatbot but as a credible
 
 We began by exploring how users perceive trustworthiness in medical products. Researching the visual language of pharmacies, medical packaging, and clinical environments, we identified a recurring theme: the use of predominantly white palettes. 
 
-White, as a colour, signifies more than neutrality — it conveys:
+White, as a colour, signifies more than neutrality - it conveys:
 - Cleanliness
 - Precision
 - Professional, clinical ethos
@@ -47,7 +47,7 @@ Inspired by these principles, we designed Vaidya.ai's interface with a predomina
 
 In branding, even small details can make a big difference. While we retained Vaidya.ai's existing logo, we introduced one subtle but significant change: centring the wordmark alongside the logo. 
 
-This minor adjustment created a sense of symmetry and alignment, reinforcing the brand's polished and professional image. This refinement not only enhances the overall aesthetic but also conveys a message of balance and reliability — qualities integral to Vaidya.ai's mission.
+This minor adjustment created a sense of symmetry and alignment, reinforcing the brand's polished and professional image. This refinement not only enhances the overall aesthetic but also conveys a message of balance and reliability - qualities integral to Vaidya.ai's mission.
 
 <br>
 
@@ -174,7 +174,7 @@ Iterations Made:
 
 # Conclusion
 
-Redesigning Vaidya.ai wasn't just about making it look good — it was about creating a platform that feels trustworthy and easy to use. From the clean, welcoming login page to the simple and effective chat interface, every part of the design was carefully planned to make users feel confident and supported.
+Redesigning Vaidya.ai wasn't just about making it look good - it was about creating a platform that feels trustworthy and easy to use. From the clean, welcoming login page to the simple and effective chat interface, every part of the design was carefully planned to make users feel confident and supported.
 
 We wanted Vaidya.ai to be more than just another app. It's designed to be a **reliable health partner**, combining clinical precision with user-friendly features. By focusing on trust, accessibility, and simplicity, we've created a platform that stands out and makes healthcare more approachable for everyone.
 
