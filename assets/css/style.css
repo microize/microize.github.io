@@ -323,6 +323,23 @@ img { max-width: 100%; }
 .prose.about-prose { max-width: none; margin-bottom: 34px; }
 .prose.about-prose p { font-size: 18px; color: var(--text-primary); font-weight: 400; }
 
+/* Band hierarchy.
+   The content column had no heading at all, so the largest type in the band
+   was body copy: the eye landed on the paragraph mass and the section's
+   actual subject - the current role - was rendered at 12px in the status dot,
+   smaller than everything around it. Three different levels (status line,
+   prose, def-list values) were also all --text-secondary, so size was the only
+   cue and the sizes were 17px vs 15px. This gives the column a five-step
+   ladder: heading 26 / lead 19 / body 17 / detail 14 / label 11. */
+.band-heading { margin: 16px 0 24px; max-width: 26ch; font-family: var(--ff-display); font-size: var(--fs-display-3); font-weight: 600; letter-spacing: -.02em; line-height: 1.2; color: var(--text-primary); }
+/* All paragraphs in a band share one colour and size. An earlier version set
+   only the first to --text-primary and left the rest secondary; because these
+   are continuous prose rather than a standalone lede, the later paragraphs
+   read as dimmed-out instead of as a lower tier. Hierarchy is the heading's
+   job, not the body's. Matches .about-prose so the two bands agree. */
+.prose-lead p { font-size: 18px; color: var(--text-primary); }
+.def-list-compact { font-size: 14px; gap: 14px 28px; }
+
 .ink-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
 .tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 
