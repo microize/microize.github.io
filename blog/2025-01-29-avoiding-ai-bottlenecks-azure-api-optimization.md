@@ -4,10 +4,7 @@ date: 2025-01-29
 excerpt: "Learn how to fix API call chaos and boost Generative AI performance through smarter API management and Azure optimization techniques."
 tags: ["enterprise-ai", "generative-ai", "performance", "cost-optimization"]
 layout: post.njk
-image: "/assets/images/blog/azure-api-optimization.svg"
 ---
-
-![Azure API Optimization and AI Performance](/assets/images/blog/placeholder.png)
 
 Imagine this: your Generative AI application is ready to shine, helping users in real-time… and then it slows to a crawl right when it's needed most.
 

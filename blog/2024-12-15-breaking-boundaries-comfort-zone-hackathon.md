@@ -4,10 +4,7 @@ date: 2024-12-15
 excerpt: "My journey through a UI/UX hackathon where I embraced new challenges, learned Figma and React, and discovered the transformative power of stepping outside your comfort zone."
 tags: ["branding", "ui-ux-design", "trust-design", "hackathon"]
 layout: post.njk
-image: "/assets/images/blog/hackathon-comfort-zone.svg"
 ---
-
-![Breaking Boundaries and Comfort Zone](/assets/images/blog/placeholder.png)
 
 There's a unique thrill in stepping into the unknown - a mix of excitement, nervousness, and hope. I recently experienced this while participating in an internal UI/UX hackathon organized by my organization. The challenge? To redesign user interface for Vaidya.ai, multimodal health assistant. You can explore the application [here](https://vaidya.ai).
 
