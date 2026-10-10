@@ -10,6 +10,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.ignores.add("node_modules/**/*");
   eleventyConfig.ignores.add("_bmad/**/*");
   eleventyConfig.ignores.add("_bmad-output/**/*");
+  // Google Search Console verification file: copied verbatim, not templated/minified
+  eleventyConfig.ignores.add("googled8a9e780455e9479.html");
 
   // Copy static assets
   eleventyConfig.addPassthroughCopy("assets");
@@ -17,6 +19,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("*.ico");
   eleventyConfig.addPassthroughCopy("*.pdf");
   eleventyConfig.addPassthroughCopy("CNAME");
+  eleventyConfig.addPassthroughCopy("googled8a9e780455e9479.html");
 
   // Date filters
   eleventyConfig.addFilter("dateDisplay", function (date) {
