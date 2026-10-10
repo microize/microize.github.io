@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>blog header generator</title>
+<!--
+  Blog header generator - p5.brush STANDALONE build (no p5.js).
+
+  ONE system, "Strata": horizontal bands laid down like sediment, weighted
+  low, with a single thin saturated seam as the focal note. Seven banners are
+  seven states of this system, not seven different pictures - a blog index of
+  unrelated compositions reads as noise.
+
+  Why this system for this format: 2.5:1 has no natural centre of gravity and
+  tiles happily into wallpaper. Horizontal strata run with the grain of the
+  format instead of fighting it, and they leave the top third as air, which
+  is where the post title sits.
+
+  THE RULES THAT MATTER (every one was violated by the first version):
+
+  - Value first, hue second. Area budget is roughly 62% light / 24% mid /
+    11% dark / 3% darkest, and adjacent tiers are >=18 L* apart or they merge
+    at thumbnail size.
+  - The brand pastels are a hue wheel at FIXED LIGHTNESS (L* 83-93) - they
+    cannot supply a mid or a dark. TONE (L* ~66) and DEEP (L* ~36) below are
+    banner-only extensions at the same hue angles. They never enter the UI.
+  - Dark comes from accumulation, not from picking a darker swatch. Passes
+    stack over a shrinking footprint, so density records how many times the
+    hand came back - which is what density means in a drawing.
+  - Restricted palette: one dominant family, one support, one accent at
+    committed chroma covering ~1% of canvas. Not a hue lottery.
+  - Per-mark randomness is small perturbation around a BANNER-level value,
+    never a fresh draw from the full range. Uniform randomness has no
+    autocorrelation; a hand has a great deal.
+  - Hatch/stroke spacing stays well above the rendered stroke width, or marks
+    self-merge into flat tint.
+  - Rendered at 2x and downsampled by the driver, which is where the brush
+    grain actually survives.
+
+  Rendered headless by tools/gen-blog-headers.mjs into
+  assets/images/blog/<slug>.webp. Nothing here ships to the site - tools/ is
+  in eleventy's ignores. Open with ?slug=<name> to preview one.
+
+  Standalone-build rules (see the p5-brush skill): brush.createCanvas(),
+  brush.clear(), brush.push/pop/translate, brush.angleMode(brush.DEGREES),
+  and brush.render() at the end or nothing appears.
+-->
+<style>
+  html, body { margin: 0; padding: 0; background: #fdfbf2; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<script type="module">
+import * as brush from 'https://cdn.jsdelivr.net/npm/p5.brush@2.2.3/dist/brush.esm.js'
+
+const params = new URLSearchParams(location.search)
+const SLUG = params.get('slug') || 'preview'
+const W = +(params.get('w') || 1280)
+const H = +(params.get('h') || 512)
+const S = W / 1280                       // all geometry scales off the 1280 design size
+
+/* ---- palette -----------------------------------------------------------
+   PASTEL values are the real brand tokens. TONE and DEEP extend each hue
+   downward in value; they exist only for artwork. COMMIT is the higher-chroma
+   ramp, used ONLY for the seam - a saturated note is strong precisely because
+   it is tiny. */
+const FAM = {
+  violet: { pastel: '#cbceea', tone: '#9a9ec5', deep: '#505371', commit: '#4a4b80' },
+  sky:    { pastel: '#cdebf1', tone: '#7ca8b0', deep: '#375a61', commit: '#075964' },
+  mint:   { pastel: '#cfe9e1', tone: '#83a99d', deep: '#3c5b52', commit: '#1f594c' },
+  peach:  { pastel: '#f8e2d3', tone: '#b99a85', deep: '#68503f', commit: '#6e472a' },
+  rose:   { pastel: '#f8e5e5', tone: '#b59a9b', deep: '#644f50', commit: '#694848' },
+  sand:   { pastel: '#f5ebcb', tone: '#ae9f71', deep: '#5f542f', commit: '#614f05' },
+  leaf:   { pastel: '#def1d0', tone: '#8ea97a', deep: '#465b36', commit: '#375911' },
+}
+const WARM_FAMS = ['peach', 'rose', 'sand', 'leaf']
+const COOL_FAMS = ['violet', 'sky', 'mint']
+
+const PAPER  = '#fdfbf2'
+const GROUND = '#f3ece0'                              // warm stain: paper as air, not blank canvas
+const WARM_DARK = ['#615f55', '#454239', '#2f2c23']   // L* 40 / 28 / 18
+const SIGNAL = '#1d1d1f'          // the brand's own darkest note. Used as an AREA, never a rule.
+
+/* ---- deterministic per-slug randomness --------------------------------- */
+function hashString(str, salt = '') {
+  let h = 2166136261 >>> 0
+  const s = str + salt
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0 }
+  return h >>> 0
+}
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0
+    let t = Math.imul(a ^ (a >>> 15), 1 | a)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+const SEED = hashString(SLUG)
+const rnd  = mulberry32(SEED)
+const rand = (lo, hi) => lo + rnd() * (hi - lo)
+/* Golden-ratio decorrelation spreads a knob far more evenly over 7 slugs than
+   a raw uniform draw, which leaves gaps and near-duplicates. */
+const knob = (salt) => (hashString(SLUG, salt) / 4294967296 * 1.6180339887) % 1
+
+/* ---- banner-level parameters. Decided ONCE, perturbed per mark. -------- */
+const bodyWarm = knob('temp') < 0.5
+const famNames = bodyWarm ? WARM_FAMS : COOL_FAMS
+const accNames = bodyWarm ? COOL_FAMS : WARM_FAMS
+const dominant = FAM[famNames[Math.floor(knob('dom') * famNames.length)]]
+const support  = FAM[famNames[(Math.floor(knob('sup') * famNames.length) + 1) % famNames.length]]
+const accent   = FAM[accNames[Math.floor(knob('acc') * accNames.length)]]
+
+const focalX     = (knob('fx') < 0.5 ? 0.36 : 0.64) * W   // on a third, never centred
+const turbulence = 0.35 + knob('turb') * 0.65
+const airTop     = 0.30 + knob('air') * 0.12              // fraction of canvas kept as air
+
+/* ---- canvas ------------------------------------------------------------ */
+brush.createCanvas(W, H, { parent: document.body, pixelDensity: 1 })
+{
+  const cv = document.querySelector('canvas')
+  cv.style.width = '100%'; cv.style.height = 'auto'
+}
+/* 1.8 at the 1280 design size. The old 3.41 stretched a 2H until it lost its
+   grain AND closed every hatch gap. Weight now comes from brush choice
+   (2B, charcoal, crayon) rather than from magnifying a hard pencil. */
+brush.scaleBrushes(S * 1.8)
+brush.angleMode(brush.DEGREES)
+brush.seed(SEED)
+brush.noiseSeed(SEED)
+
+brush.clear(PAPER)
+brush.push()
+brush.translate(-W / 2, -H / 2)
+
+/* ===== 1. GROUND ========================================================
+   A broad soft stain so the paper reads as light-filled air rather than
+   unpainted canvas. Very low opacity, heavy bleed, running off three edges. */
+brush.noStroke()
+brush.fillBleed(0.5, 'out')
+brush.fillTexture(0.6, 0.25, true)
+brush.fill(GROUND, 38)
+brush.rect(-0.1 * W, airTop * H - 0.1 * H, 1.2 * W, 1.3 * H)
+brush.noFill()
+
+/* ===== 2. STRATA (underpainting only) ==================================
+   Two or three very soft bands, low opacity, purely to give the upper half
+   air and a warm/cool split. Deliberately FEW: a stack of soft horizontal
+   bands plus a wave field inevitably reads as landscape, so the strata are
+   demoted to ground and the structure comes from section 3. */
+const horizon = (0.46 + knob('hz') * 0.10) * H
+brush.noStroke()
+for (let i = 0; i < 3; i++) {
+  const t = i / 2
+  brush.fillBleed(0.5 - t * 0.2, 'out')
+  brush.fillTexture(0.65, 0.25, true)
+  brush.fill(t < 0.5 ? dominant.pastel : support.tone, 34 + t * 46)
+  brush.rect(-0.1 * W, horizon - (0.16 - t * 0.1) * H + t * 0.22 * H,
+             1.2 * W, (0.12 + t * 0.26) * H)
+  brush.noFill()
+}
+
+/* ===== 3. THE REGISTER STACK ============================================
+   The actual subject. One set of rectangles from recursive subdivision with
+   REPEATING proportions, then printed 5 times, each pass offset by an amount
+   that varies with position - a press slipping, not per-element jitter. Where
+   passes coincide you get dark; where they diverge you get chromatic fringe.
+   This is what produces the value range, and it cannot be read as terrain. */
+const RATIOS = [1 / 3, 2 / 5, 1 / 2, 3 / 5]      // a fixed small set: repeated
+                                                  // proportions are what make a
+                                                  // composition read as composed
+const leaves = []
+;(function split(x, y, w, h, depth) {
+  if (depth >= 3 || (depth >= 1 && rnd() < 0.3)) { leaves.push({ x, y, w, h }); return }
+  const vertical = w / h > 1.1
+  const r = RATIOS[Math.floor(rnd() * RATIOS.length)]
+  if (vertical) { split(x, y, w * r, h, depth + 1); split(x + w * r, y, w * (1 - r), h, depth + 1) }
+  else          { split(x, y, w, h * r, depth + 1); split(x, y + h * r, w, h * (1 - r), depth + 1) }
+})(-0.06 * W, horizon - 0.30 * H, 1.12 * W, 0.92 * H, 0)
+
+/* A minority take every pass and become the dark; the rest stay ghosts. */
+const inked = leaves.filter(() => rnd() < 0.38)
+const focalLeaf = leaves.reduce((best, L) =>
+  Math.abs(L.x + L.w / 2 - focalX) < Math.abs(best.x + best.w / 2 - focalX) ? L : best, leaves[0])
+if (!inked.includes(focalLeaf)) inked.push(focalLeaf)
+
+const INKS = [dominant.tone, support.tone, dominant.deep, WARM_DARK[1], WARM_DARK[2]]
+const K = 5
+const amp = (4 + knob('amp') * 7) * S
+for (let k = 0; k < K; k++) {
+  const phase = k * 1.7
+  const subset = k < 2 ? leaves : inked
+  const col = INKS[k]
+  for (const L of subset) {
+    const cx = L.x + L.w / 2, cy = L.y + L.h / 2
+    const dx = amp * Math.sin((cx / W) * Math.PI * 1.3 + phase) * (k - K / 2)
+    const dy = amp * Math.cos((cy / H) * Math.PI * 0.8 + phase) * (k - K / 2) * 0.6
+    const jx = rand(-2, 2) * S, jy = rand(-2, 2) * S   // contours never coincide exactly
+    brush.noStroke()
+    if (k === 2) {
+      /* one hatch pass among the masses: mixing fill types across passes is
+         what stops it reading as five copies of a solid. Spacing stays well
+         above the rendered stroke width so it cannot collapse to flat tint. */
+      brush.hatchStyle('cpencil', col, 0.9)
+      brush.hatch((9 + rnd() * 5) * S, 14 + k * 5, { rand: 0.12, continuous: false })
+      brush.rect(L.x + dx + jx, L.y + dy + jy, L.w, L.h)
+      brush.noHatch()
+    } else {
+      brush.mass(k < 2 ? 'pastel' : 'crayon', col, {
+        precision: 0.35 + k * 0.1, strength: 0.34 + k * 0.1, gradient: 0.4, outline: false,
+      })
+      brush.rect(L.x + dx + jx, L.y + dy + jy, L.w, L.h)
+      brush.noMass()
+    }
+  }
+}
+
+/* ===== 4. FIELD BREAK ===================================================
+   Only a handful, and only low in the frame. The previous version ran 40+ of
+   these across the whole canvas and they read as contour lines on a map. */
+brush.field('waves')
+brush.set('charcoal', dominant.deep, 0.45)
+for (let i = 0; i < Math.round(5 + turbulence * 6); i++) {
+  brush.flowLine(rand(-0.06, 0.7) * W, horizon + rand(0.04, 0.44) * H,
+                 rand(0.14, 0.4) * W, rand(-7, 7) * turbulence)
+}
+brush.noField()
+brush.noStroke()
+
+/* ===== 5. RECOVERY ======================================================
+   Scrub paper back over worked ground. Lifting out matters as much as putting
+   down, and generative work essentially never does it. */
+brush.fillBleed(0.5, 'out')
+brush.fillTexture(0.4, 0.2, true)
+brush.fill(PAPER, 115)
+for (let i = 0; i < 2; i++) {
+  brush.rect(rand(-0.05, 0.45) * W, horizon - rand(0.02, 0.14) * H,
+             rand(0.26, 0.5) * W, rand(0.04, 0.09) * H)
+}
+brush.noFill()
+
+/* ===== 6. THE SEAM ======================================================
+   The focal note: the only saturated colour, the opposite temperature to the
+   body, and the only hard thin edge among soft thick ones. Drawn last so it
+   is unmistakably on top - in the previous version it was buried. Weight
+   peaks at the focal third and both ends dissolve. */
+const segs = 30
+const sx0 = rand(0.04, 0.14) * W
+const sx1 = sx0 + rand(0.64, 0.86) * W
+const seamY = focalLeaf.y + focalLeaf.h * rand(0.08, 0.26)
+for (let i = 0; i < segs; i++) {
+  const a = sx0 + (sx1 - sx0) * (i / segs)
+  const b = sx0 + (sx1 - sx0) * ((i + 1) / segs)
+  const d = Math.abs((a + b) / 2 - focalX) / (0.5 * W)
+  const falloff = Math.max(0, 1 - d * d)
+  if (falloff < 0.05) continue
+  brush.set(falloff > 0.5 ? 'rotring' : 'pen', accent.commit, 0.6 + falloff * 2.4)
+  const yy = seamY + Math.sin(i * 0.55) * 1.8 * S + rand(-1, 1) * S
+  brush.line(a, yy, b, yy + rand(-1, 1) * S)
+}
+brush.noStroke()
+
+/* ===== 7. FOUND EDGE ====================================================
+   One partial contour on the focal rectangle, in the brand's darkest note.
+   Drawn on only part of the perimeter: some edges found, some lost, which is
+   what the first version got wrong by stroking every shape identically. */
+brush.set('2B', SIGNAL, 1.3)
+const fl = focalLeaf
+brush.line(fl.x, fl.y + fl.h, fl.x + fl.w * rand(0.45, 0.85), fl.y + fl.h + rand(-2, 2) * S)
+if (rnd() < 0.6) brush.line(fl.x, fl.y + fl.h * rand(0.3, 0.7), fl.x, fl.y + fl.h)
+brush.noStroke()
+
+brush.pop()
+brush.render()   // required in the standalone build
+
+requestAnimationFrame(() => {
+  document.body.dataset.rendered = '1'
+  document.title = `done:${SLUG}:${bodyWarm ? 'warm' : 'cool'}`
+})
+</script>
+</body>
+</html>

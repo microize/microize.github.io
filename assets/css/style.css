@@ -521,6 +521,18 @@ img { max-width: 100%; }
 }
 .thumb-21-9 { aspect-ratio: 21/9; }
 
+/* Generated blog header banners (tools/gen-blog-headers.mjs). The listing
+   variant reuses .thumb for its hairline border, but overrides the text-block
+   behaviour since the artwork is a real image. */
+.thumb-art { aspect-ratio: 21/9; display: block; width: 100%; height: auto; padding: 0; object-fit: cover; background: var(--background); }
+.article-figure { margin: 0 0 40px; }
+.article-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--border); }
+/* The banners are drawn on warm paper, so at full brightness they glare
+   against the near-black dark surface. Knock them back just enough to read
+   as a print on a dark wall rather than a lightbox. */
+[data-theme="dark"] .article-figure img,
+[data-theme="dark"] .thumb-art { filter: brightness(.86) contrast(1.02); }
+
 /* ============================================================
    INDEX ROW
    Ported from components/10-site/IndexRow.jsx.

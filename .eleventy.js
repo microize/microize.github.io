@@ -10,6 +10,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.ignores.add("node_modules/**/*");
   eleventyConfig.ignores.add("_bmad/**/*");
   eleventyConfig.ignores.add("_bmad-output/**/*");
+  eleventyConfig.ignores.add("tools/**/*");
   // Google Search Console verification file: copied verbatim, not templated/minified
   eleventyConfig.ignores.add("googled8a9e780455e9479.html");
 
@@ -20,6 +21,14 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("*.pdf");
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("googled8a9e780455e9479.html");
+
+  // Generated blog header banner for a post, keyed off its filename.
+  // Images are pre-rendered by tools/gen-blog-headers.mjs; nothing is
+  // generated at build time.
+  eleventyConfig.addFilter("headerImage", function (filePathStem) {
+    const slug = String(filePathStem || "").split("/").pop();
+    return "/assets/images/blog/" + slug + ".webp";
+  });
 
   // Date filters
   eleventyConfig.addFilter("dateDisplay", function (date) {

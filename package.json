@@ -7,6 +7,7 @@
     "build:css": "cleancss -o _site/assets/css/style.css assets/css/style.css",
     "build:js": "terser assets/js/script.js -o _site/assets/js/script.js -c -m && terser assets/js/theme.js -o _site/assets/js/theme.js -c -m && terser assets/js/data-flow-game.js -o _site/assets/js/data-flow-game.js -c -m",
     "build": "npm run build:eleventy && npm run build:css && npm run build:js",
+    "headers": "node tools/gen-blog-headers.mjs",
     "serve": "eleventy --serve",
     "start": "eleventy --serve",
     "debug": "DEBUG=Eleventy* eleventy"
@@ -28,6 +29,7 @@
   "devDependencies": {
     "clean-css-cli": "^5.6.3",
     "html-minifier": "^4.0.0",
+    "sharp": "^0.35.5",
     "terser": "^5.46.0"
   }
 }

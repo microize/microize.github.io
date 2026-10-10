@@ -39,7 +39,7 @@ permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumbe
     <div class="tile-grid" style="margin-top:32px">
       {% for post in latest %}
       <div>
-        <div class="thumb pastel-{{ pastels[loop.index0 % pastels.length] }}">{{ post.data.title }}</div>
+        <img class="thumb thumb-art" src="{{ post.filePathStem | headerImage }}" alt="" width="1280" height="512" loading="lazy" decoding="async">
         <a class="blog-card" href="{{ post.url }}">
           <h3 class="blog-card-title">{{ post.data.title }}</h3>
           <div class="blog-card-meta">{{ post.data.date | dateDisplay }} · {{ post.templateContent | readingTime }}</div>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>blog header contact sheet</title>
+<!--
+  Contact sheet for the blog header generator. Serve the repo over http
+  (the generator uses an ESM import, which file:// blocks) and open this:
+
+      python -m http.server 8090
+      http://127.0.0.1:8090/tools/preview.html
+
+  Shows every painting mode, plus every real post slug, at a glance.
+-->
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; padding: 28px; background: #ffffff; color: #1d1d1f;
+         font: 13px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  h2 { font-size: 13px; letter-spacing: .09em; text-transform: uppercase;
+       color: #86868b; font-weight: 500; margin: 32px 0 12px; }
+  h2:first-of-type { margin-top: 0; }
+  .sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+  figure { margin: 0; }
+  iframe { width: 100%; aspect-ratio: 1280 / 512; border: 1px solid #e8e8ed; display: block; }
+  figcaption { margin-top: 6px; font-size: 11px; letter-spacing: .06em;
+               text-transform: uppercase; color: #86868b; }
+</style>
+</head>
+<body>
+<h2>Painting modes</h2>
+<div class="sheet" id="modes"></div>
+<h2>Actual posts</h2>
+<div class="sheet" id="posts"></div>
+<script>
+const MODES = ['mondrian', 'martin', 'rothko', 'lewitt', 'kandinsky', 'albers', 'klee']
+const POSTS = [
+  'branding-trust-reliability-vaidya-ai',
+  'breaking-boundaries-comfort-zone-hackathon',
+  'avoiding-ai-bottlenecks-azure-api-optimization',
+  'a-smarter-way-to-build-software-with-ai',
+  'docker-from-vms-to-containers',
+  'nlp-basics-bag-of-words-quora-classification',
+  'semantic-search-lesson-1-keyword-vs-semantic',
+]
+const cell = (src, label) => {
+  const fig = document.createElement('figure')
+  const f = document.createElement('iframe')
+  f.src = src; f.loading = 'lazy'
+  const cap = document.createElement('figcaption')
+  cap.textContent = label
+  fig.append(f, cap)
+  return fig
+}
+document.getElementById('modes').append(
+  ...MODES.map((m) => cell(`blog-header-gen.html?slug=mode-demo&mode=${m}&w=1280&h=512`, m)))
+document.getElementById('posts').append(
+  ...POSTS.map((s) => cell(`blog-header-gen.html?slug=${encodeURIComponent(s)}&w=1280&h=512`,
+                           s)))
+</script>
+</body>
+</html>
